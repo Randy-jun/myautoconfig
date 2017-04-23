@@ -4,7 +4,7 @@ DATE=$(date)
 echo "Time is $DATE"
 
 #sudo apt update && sudo apt -y upgrade
-sudo apt -y install htop vim tmux zsh
+#sudo apt -y install htop vim tmux zsh
 
 ln -s $HOME/myautoconfig/dotfiles/tmux.conf $HOME/myautoconfig/.tmux.conf 2> /dev/null
 git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
