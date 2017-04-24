@@ -26,7 +26,7 @@ else
 	echo -e "Vim deployed [\033[;31mFaile\033[;m]."
 fi
 
-cd $HOME && curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh > /dev/null 2>&1 && cd - >/dev/null 2>&1
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)" > /dev/null 2>&1
 ln -s $HOME/myautoconfig/dotfiles/zshrc $HOME/.zshrc > /dev/null 2>&1
 if [ $? = 0 ] ; then
 	echo -e "Zsh deployed [\033[;32mFinish\033[;m]."
