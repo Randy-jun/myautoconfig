@@ -4,13 +4,14 @@ oh_my_zsh_install()
 {
 	#sudo sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)";
 	git clone https://github.com/robbyrussell/oh-my-zsh.git $HOME/.oh-my-zsh/ > /dev/null 2>&1;
+	sudo chsh -s /bin/zsh;
 }
 
 main()
 {
 	#sudo apt update && sudo apt -y upgrade;
 	sudo apt -y install htop vim tmux zsh > /dev/null 2>&1 &&
-	sudo chsh -s /bin/zsh;
+
 	if [ $? = 0 ] ; then
 		echo -e "Software has been installed [\033[;32mFinish\033[;m].";
 	else
@@ -55,10 +56,10 @@ if [ $# -ge 0 -a $# -le 1 ]; then
 		main;
 	fi
 	case $1 in
-		install) echo "$0 install start...";
-			main;;
-		update) echo "$0 update start...";
-			update;;
+		install) echo "$0 install start..." && main;
+			;;
+		update) echo "$0 update start..." && update;
+			;;
 		*) echo -e "Usage:$0 [ \033[;32minstall\033[;m | \033[;32mupdate\033[;m ]";
 			;;
 	esac
