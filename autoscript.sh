@@ -4,26 +4,27 @@ DATE=$(date)
 echo "Time is $DATE"
 
 #sudo apt update && sudo apt -y upgrade
-#sudo apt -y install htop vim tmux zsh
+sudo apt -y install htop vim tmux zsh
 
-ln -s $HOME/myautoconfig/dotfiles/tmux.conf $HOME/myautoconfig/.tmux.conf 2> /dev/null
-git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm 2> /dev/null
+ln -s $HOME/myautoconfig/dotfiles/tmux.conf $HOME/.tmux.conf 2> /dev/null
 if [ $? = 0 ] ; then
-	echo -e "Tmux deployed [\033[;32mFinish\033[;m]."
+	echo "Tmux deployed [\033[;32mFinish\033[;m]."
 else
-	echo -e "Tmux deployed [\033[;31mFaile\033[;m]."
+	echo "Tmux deployed [\033[;31mFaile\033[;m]."
 fi
 
-ln -s $HOME/myautoconfig/dotfiles/vimrc $HOME/myautoconfig/.vimrc 2> /dev/null
+ln -s $HOME/myautoconfig/dotfiles/vimrc $HOME/.vimrc 2> /dev/null
 if [ $? = 0 ] ; then
-	echo -e "Vim deployed [\033[;32mFinish\033[;m]."
+	echo "Vim deployed [\033[;32mFinish\033[;m]."
 else
-	echo -e "Vim deployed [\033[;31mFaile\033[;m]."
+	echo "Vim deployed [\033[;31mFaile\033[;m]."
 fi
 
-ln -s $HOME/myautoconfig/dotfiles/zshrc $HOME/myautoconfig/.zshrc 2> /dev/null
+curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh 2> /dev/null
+ln -s $HOME/myautoconfig/dotfiles/zshrc $HOME/.zshrc 2> /dev/null
 if [ $? = 0 ] ; then
-	echo -e "Zsh deployed [\033[;32mFinish\033[;m]."
+	echo "Zsh deployed [\033[;32mFinish\033[;m]."
 else
-	echo -e "Zsh deployed [\033[;31mFaile\033[;m]."
+	echo "Zsh deployed [\033[;31mFaile\033[;m]."
 fi
