@@ -11,7 +11,7 @@ else
 	echo -e "Software has been installed [\033[;31mFaile\033[;m]."
 fi
 
-git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm > /dev/null 2>&1
+git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm > /dev/null 2>&1 &&
 ln -s $HOME/myautoconfig/dotfiles/tmux.conf $HOME/.tmux.conf > /dev/null 2>&1
 if [ $? = 0 ] ; then
 	echo -e "Tmux deployed [\033[;32mFinish\033[;m]."
@@ -26,7 +26,8 @@ else
 	echo -e "Vim deployed [\033[;31mFaile\033[;m]."
 fi
 
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)" > /dev/null 2>&1
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)" &&
+#> /dev/null 2>&1
 ln -s $HOME/myautoconfig/dotfiles/zshrc $HOME/.zshrc > /dev/null 2>&1
 if [ $? = 0 ] ; then
 	echo -e "Zsh deployed [\033[;32mFinish\033[;m]."
