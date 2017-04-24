@@ -9,7 +9,7 @@ oh_my_zsh_install()
 main()
 {
 	#sudo apt update && sudo apt -y upgrade;
-	sudo apt -y install htop vim tmux zsh > /dev/null 2>&1; &&
+	sudo apt -y install htop vim tmux zsh > /dev/null 2>&1 &&
 	sudo chsh -s /bin/zsh;
 	if [ $? = 0 ] ; then
 		echo -e "Software has been installed [\033[;32mFinish\033[;m].";
