@@ -54,6 +54,7 @@ if [ $# -ge 0 -a $# -le 1 ]; then
 	if [ $# -eq 0 ]; then
 		echo "$0 install start...";
 		main;
+		exit 0;
 	fi
 	case $1 in
 		install) echo "$0 install start..." && main;
