@@ -62,7 +62,7 @@ if [ $# -ge 0 -a $# -le 1 ]; then
 		update) echo "$0 update start..." && update;
 			exit 0
 			;;
-		*) echo -e "Usage:$0 [ \033[;32minstall\033[;m | \033[;32mupdate\033[;m ]";
+		*) echo -e "Usage:$0 1[ \033[;32minstall\033[;m | \033[;32mupdate\033[;m ]";
 			;;
 	esac
 else
