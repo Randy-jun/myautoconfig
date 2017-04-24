@@ -54,10 +54,10 @@ if [ $# -ge 0 -a $# -le 1 ]; then
 		main;
 	fi
 	case $1 in
-		install) echo "$0 install start..."
-			main;
-		update) echo "$0 update start..."
-			update;
+		install) echo "$0 install start...";
+			main;;
+		update) echo "$0 update start...";
+			update;;
 	esac
 else
 	echo "Usage:$0 [install|update]";
