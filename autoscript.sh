@@ -11,7 +11,6 @@ if [ $# -ge 0 -a $# -le 1 ]; then
 	case $1 in
 		install) echo "$0 install start...";
 			main;
-	case $1 in
 		update) echo "$0 update start...";
 			update;
 	esac
