@@ -3,8 +3,8 @@
 oh_my_zsh_install()
 {
 	#sudo sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)";
-	git clone https://github.com/robbyrussell/oh-my-zsh.git $HOME/.oh-my-zsh/ > /dev/null 2>&1;
 	sudo chsh -s /bin/zsh;
+	git clone https://github.com/robbyrussell/oh-my-zsh.git $HOME/.oh-my-zsh/ > /dev/null 2>&1;
 }
 
 main()
@@ -51,6 +51,7 @@ echo "Time is $DATE";
 if [ $# -ge 0 -a $# -le 1 ]; then
 	echo "$# $0 $1";
 	if [ $# -eq 0 ]; then
+		echo "$0 install start...";
 		main;
 	fi
 	case $1 in
