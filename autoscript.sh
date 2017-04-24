@@ -4,7 +4,6 @@ oh_my_zsh_install()
 {
 	#sudo sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)";
 	git clone https://github.com/robbyrussell/oh-my-zsh.git $HOME/.oh-my-zsh/ > /dev/null 2>&1;
-	sudo chsh -s /bin/zsh;
 }
 
 main()
@@ -33,6 +32,7 @@ main()
 		echo -e "Vim deployed [\033[;31mFaile\033[;m].";
 	fi
 
+	sudo chsh -s /bin/zsh > /dev/null 2>&1 &&
 	oh_my_zsh_install && ln -s $HOME/myautoconfig/dotfiles/zshrc $HOME/.zshrc > /dev/null 2>&1;
 	if [ $? = 0 ] ; then
 		echo -e "Zsh deployed [\033[;32mFinish\033[;m].";
@@ -57,8 +57,10 @@ if [ $# -ge 0 -a $# -le 1 ]; then
 	fi
 	case $1 in
 		install) echo "$0 install start..." && main;
+			exit 0
 			;;
 		update) echo "$0 update start..." && update;
+			exit 0
 			;;
 		*) echo -e "Usage:$0 [ \033[;32minstall\033[;m | \033[;32mupdate\033[;m ]";
 			;;
