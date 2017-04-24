@@ -5,7 +5,11 @@ echo "Time is $DATE"
 
 #sudo apt update && sudo apt -y upgrade
 sudo apt -y install htop vim tmux zsh > /dev/null 2>&1
-echo "Software has been installed finish."
+if [ $? = 0 ] ; then
+	echo "Software has been installed [\033[;32mFinish\033[;m."
+else
+	echo "Software has been installed [\033[;32mFaile\033[;m."
+fi
 
 git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm > /dev/null 2>&1
 ln -s $HOME/myautoconfig/dotfiles/tmux.conf $HOME/.tmux.conf > /dev/null 2>&1
