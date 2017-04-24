@@ -4,7 +4,10 @@ oh_my_zsh_install()
 {
 	#sudo sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)";
 	git clone https://github.com/robbyrussell/oh-my-zsh.git $HOME/.oh-my-zsh/ > /dev/null 2>&1;
+	echo "321";
 	sudo chsh -s /bin/zsh;
+	echo "321";
+	return 0;
 }
 
 main()
