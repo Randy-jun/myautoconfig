@@ -6,6 +6,7 @@ echo "Time is $DATE";
 oh_my_zsh_install()
 {
 	sudo sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)";
+	exit;
 }
 
 main()
