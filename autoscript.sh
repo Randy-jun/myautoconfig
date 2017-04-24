@@ -3,6 +3,22 @@
 DATE=$(date);
 echo "Time is $DATE";
 
+if [ $# -ge 0 -a $# -le 1 ]; then
+	echo "$# $0 $1";
+	if [ $# -eq 0 ]; then
+		main;
+	fi
+	case $1 in
+		install) echo "$0 install start...";
+			main;
+	case $1 in
+		update) echo "$0 update start...";
+			update;
+	esac
+else
+	echo "Usage:$0 [install|update]";
+fi
+
 oh_my_zsh_install()
 {
 	#sudo sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)";
@@ -43,4 +59,7 @@ main()
 	fi
 }
 
-main;
+update()
+{
+	echo "$0 update";
+}
