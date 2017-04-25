@@ -1,22 +1,10 @@
 #!/bin/bash
 
-oh_my_zsh_config()
-{
-	sudo chsh $LOGNAME -s /bin/zsh > /dev/null 2>&1 &&
-	git clone https://github.com/robbyrussell/oh-my-zsh.git $HOME/.oh-my-zsh/ > /dev/null 2>&1 &&
-	ln -s $HOME/myautoconfig/dotfiles/zshrc $HOME/.zshrc > /dev/null 2>&1;
-	if [ $? = 0 ] ; then
-		return 0;
-	else
-		return 1;
-	fi
-}
-
 tmux_config()
 {
 	git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm > /dev/null 2>&1 &&
 	ln -s $HOME/myautoconfig/dotfiles/tmux.conf $HOME/.tmux.conf > /dev/null 2>&1 &&
-	ch -c $HOME/.tmux/plugins/tpm/tpm > /dev/null 2>&1;
+	sh -c $HOME/.tmux/plugins/tpm/tpm > /dev/null 2>&1;
 	if [ $? = 0 ] ; then
 		return 0;
 	else
@@ -27,6 +15,18 @@ tmux_config()
 vim_config()
 {
 	ln -s $HOME/myautoconfig/dotfiles/vimrc $HOME/.vimrc > /dev/null 2>&1;
+	if [ $? = 0 ] ; then
+		return 0;
+	else
+		return 1;
+	fi
+}
+
+oh_my_zsh_config()
+{
+	sudo chsh $LOGNAME -s /bin/zsh > /dev/null 2>&1 &&
+	git clone https://github.com/robbyrussell/oh-my-zsh.git $HOME/.oh-my-zsh/ > /dev/null 2>&1 &&
+	ln -s $HOME/myautoconfig/dotfiles/zshrc $HOME/.zshrc > /dev/null 2>&1;
 	if [ $? = 0 ] ; then
 		return 0;
 	else
