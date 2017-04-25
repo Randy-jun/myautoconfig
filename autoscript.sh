@@ -3,8 +3,7 @@
 tmux_config()
 {
 	git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm > /dev/null 2>&1 &&
-	ln -s $HOME/myautoconfig/dotfiles/tmux.conf $HOME/.tmux.conf > /dev/null 2>&1 &&
-	sh -c $HOME/.tmux/plugins/tpm/tpm > /dev/null 2>&1;
+	ln -s $HOME/myautoconfig/dotfiles/tmux.conf $HOME/.tmux.conf > /dev/null 2>&1;
 	if [ $? = 0 ] ; then
 		return 0;
 	else
