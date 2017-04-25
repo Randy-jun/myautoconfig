@@ -61,7 +61,7 @@ main()
 		exit 1;
 	fi
 
-	oh_my_zsh_install;
+	oh_my_zsh_config;
 	if [ $? = 0 ] ; then
 		echo -e "Zsh deployed [\033[;32mFinish\033[;m].";
 	else
