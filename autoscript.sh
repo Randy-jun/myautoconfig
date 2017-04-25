@@ -5,8 +5,10 @@ tmux_config()
 	git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm > /dev/null 2>&1 &&
 	ln -s $HOME/myautoconfig/dotfiles/tmux.conf $HOME/.tmux.conf > /dev/null 2>&1;
 	if [ $? = 0 ] ; then
+		echo "0000";
 		return 0;
 	else
+		echo "1111";
 		return 1;
 	fi
 }
@@ -89,7 +91,7 @@ sudo echo "Time is $DATE";
 
 if [ $# -ge 0 -a $# -le 1 ]; then
 	if [ $# -eq 0 ]; then
-		echo "$0 install start...";
+		echo "$0 start install...";
 		main;
 		exit 0;
 	fi
@@ -100,7 +102,7 @@ if [ $# -ge 0 -a $# -le 1 ]; then
 		update) echo "$0 start update..." && update;
 			exit 0;
 			;;
-		*) echo -e "Usage:$0 1[ \033[;32minstall\033[;m | \033[;32mupdate\033[;m ]";
+		*) echo -e "Usage:$0 [ \033[;32minstall\033[;m | \033[;32mupdate\033[;m ]";
 			exit 0;
 			;;
 	esac
