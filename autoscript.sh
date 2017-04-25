@@ -5,10 +5,8 @@ tmux_config()
 	git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm > /dev/null 2>&1 &&
 	ln -s $HOME/myautoconfig/dotfiles/tmux.conf $HOME/.tmux.conf > /dev/null 2>&1;
 	if [ $? = 0 ] ; then
-		echo "0000";
 		return 0;
 	else
-		echo "1111";
 		return 1;
 	fi
 }
