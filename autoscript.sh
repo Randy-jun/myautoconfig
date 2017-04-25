@@ -32,7 +32,7 @@ main()
 		echo -e "Vim deployed [\033[;31mFaile\033[;m].";
 	fi
 
-	sudo chsh -s /bin/zsh > /dev/null 2>&1 &&
+	sudo chsh $LOGNAME -s /bin/zsh > /dev/null 2>&1 &&
 	oh_my_zsh_install && ln -s $HOME/myautoconfig/dotfiles/zshrc $HOME/.zshrc > /dev/null 2>&1;
 	if [ $? = 0 ] ; then
 		echo -e "Zsh deployed [\033[;32mFinish\033[;m].";
@@ -50,7 +50,6 @@ DATE=$(date);
 sudo echo "Time is $DATE";
 
 if [ $# -ge 0 -a $# -le 1 ]; then
-	echo "$# $0 $1";
 	if [ $# -eq 0 ]; then
 		echo "$0 install start...";
 		main;
