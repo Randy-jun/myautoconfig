@@ -33,6 +33,16 @@ oh_my_zsh_config()
 	fi
 }
 
+pip_config()
+{
+	sudo ln -s $HOME/myautoconfig/dotfiles/pip.conf /etc/pip.conf > /dev/null 2>&1;
+	if [ $? = 0 ] ; then
+		return 0;
+	else
+		return 1;
+	fi
+}
+
 main()
 {
 	#sudo apt update && sudo apt -y upgrade;
@@ -66,6 +76,14 @@ main()
 		echo -e "Zsh deployed [\033[;32mFinish\033[;m].";
 	else
 		echo -e "Zsh deployed [\033[;31mFaile\033[;m].";
+		exit 1;
+	fi
+
+	pip_config;
+	if [ $? = 0 ] ; then
+		echo -e "Pip deployed [\033[;32mFinish\033[;m].";
+	else
+		echo -e "Pip deployed [\033[;31mFaile\033[;m].";
 		exit 1;
 	fi
 	return 0;
