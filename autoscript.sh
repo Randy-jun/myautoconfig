@@ -46,7 +46,7 @@ pip_config()
 main()
 {
 	#sudo apt update && sudo apt -y upgrade;
-	sudo apt -y install htop vim tmux zsh > /dev/null 2>&1;
+	sudo apt -y install htop vim tmux zsh tweak curl plank synapse > /dev/null 2>&1;
 
 	if [ $? = 0 ] ; then
 		echo -e "Software has been installed [\033[;32mFinish\033[;m].";
