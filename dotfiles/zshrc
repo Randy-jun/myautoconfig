@@ -49,8 +49,11 @@ plugins=(git)
 
 # User configuration
 
-export PATH="/home/yroot/mycoder/project/cocos2d-x-3.5/templates:/home/yroot/mycoder/project/cocos2d-x-3.5/tools/cocos2d-console/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games"
+export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games"
 # export MANPATH="/usr/local/man:$MANPATH"
+export PYTHONPATH="/home/yroot/anaconda2:/usr/local:/home/yroot/caffe2/build:/home/yroot/ssd/caffe/python:$PYTHONPATH"
+
+export LD_LIBRARY_PATH="/usr/local/lib:$LD_LIBRARY_PATH"
 
 source $ZSH/oh-my-zsh.sh
 
