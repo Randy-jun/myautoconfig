@@ -48,12 +48,18 @@ ZSH_THEME="robbyrussell"
 plugins=(git)
 
 # User configuration
-
+export CUDA_HOME="/usr/local/cuda"
 export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games"
+export PATH="/usr/local/cuda/bin:$PATH"
 # export MANPATH="/usr/local/man:$MANPATH"
-export PYTHONPATH="/home/yroot/anaconda2:/usr/local:/home/yroot/caffe2/build:/home/yroot/ssd/caffe/python:$PYTHONPATH"
+export PYTHONPATH="/usr/local:$PYTHONPATH"
+export PYTHONPATH="/home/yroot/caffe2/:$PYTHONPATH"
+export PYTHONPATH="/home/yroot/caffe/python:$PYTHONPATH"
+export PYTHONPATH="/home/yroot/caffe2/caffe2/python:$PYTHONPATH"
+export PYTHONPATH="/usr/lib:$PYTHONPATH"
 
 export LD_LIBRARY_PATH="/usr/local/lib:$LD_LIBRARY_PATH"
+export LD_LIBRARY_PATH="/usr/local/cuda/lib64:$LD_LIBRARY_PATH"
 
 source $ZSH/oh-my-zsh.sh
 
