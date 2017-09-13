@@ -53,7 +53,6 @@ export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/g
 export PATH="/usr/local/cuda/bin:$PATH"
 # export MANPATH="/usr/local/man:$MANPATH"
 export PYTHONPATH="/usr/local:$PYTHONPATH"
-export PYTHONPATH="/home/yroot/caffe2/:$PYTHONPATH"
 export PYTHONPATH="/home/yroot/caffe/python:$PYTHONPATH"
 export PYTHONPATH="/home/yroot/caffe2/caffe2/python:$PYTHONPATH"
 export PYTHONPATH="/usr/lib:$PYTHONPATH"
