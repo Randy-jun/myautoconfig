@@ -46,7 +46,8 @@ pip_config()
 main()
 {
 	#sudo apt update && sudo apt -y upgrade;
-	sudo apt -y install htop vim tmux zsh curl synapse > /dev/null 2>&1;
+	#sudo apt -y install htop vim tmux zsh curl synapse > /dev/null 2>&1;
+	sudo apt -y install htop vim zsh curl synapse > /dev/null 2>&1;
 
 	if [ $? = 0 ] ; then
 		echo -e "Software has been installed [\033[;32mFinish\033[;m].";
@@ -55,13 +56,13 @@ main()
 		exit 1;
 	fi
 
-	tmux_config;
-	if [ $? = 0 ] ; then
-		echo -e "Tmux deployed [\033[;32mFinish\033[;m].";
-	else
-		echo -e "Tmux deployed [\033[;31mFaile\033[;m].";
-		exit 1;
-	fi
+	#tmux_config;
+	#if [ $? = 0 ] ; then
+	#	echo -e "Tmux deployed [\033[;32mFinish\033[;m].";
+	#else
+	#	echo -e "Tmux deployed [\033[;31mFaile\033[;m].";
+	#	exit 1;
+	#fi
 
 	vim_config;
 	if [ $? = 0 ] ; then
@@ -87,6 +88,12 @@ main()
 		exit 1;
 	fi
 	return 0;
+}
+
+env_install()
+{
+	sudo apt update && sudo apt -y full-upgrade;
+	sudo apt -y install  > /dev/null 2>&1;
 }
 
 update()
