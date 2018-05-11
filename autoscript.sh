@@ -46,8 +46,8 @@ pip_config()
 mariadb_config()
 {
     echo "mariadb_config...";
-
-    sudo systemctl start mariadb && sudo systemctl enable mariadb;
+	mysql -v
+    sudo systemctl restart mariadb && sudo systemctl enable mariadb;
     if [ $? = 0 ] ; then
         return 0;
     else
@@ -58,8 +58,9 @@ mariadb_config()
 nginx_config()
 {
     echo "nginx_config...";
-
-    sudo systemctl start nginx && sudo systemctl enable nginx;
+	nginx -v
+	sudo cat $HOME/myautoconfig/dotfiles/env_config_file/default > /etc/nginx/sites-enabled/default
+    sudo systemctl restart nginx && sudo systemctl enable nginx;
     if [ $? = 0 ] ; then
         return 0;
     else
@@ -71,11 +72,12 @@ php_config()
 {
     echo "php_config...";
 	php -v;
+	sudo cat $HOME/myautoconfig/dotfiles/env_config_file/php.ini > /etc/php/7.1/cli/php.ini;
 	curl -sS https://getcomposer.org/installer | php;
 	sudo mv composer.phar /usr/local/bin/composer;
 	composer config -g repo.packagist composer https://packagist.phpcomposer.com;
 	composer self-update;
-    sudo systemctl start php7.1-fpm && sudo systemctl enable php7.1-fpm;
+    sudo systemctl restart php7.1-fpm && sudo systemctl enable php7.1-fpm;
     if [ $? = 0 ] ; then
         return 0;
     else
@@ -85,7 +87,7 @@ php_config()
 
 main()
 {
-    sudo apt update && sudo apt -y full-upgrade;
+    #sudo apt update && sudo apt -y full-upgrade;
     #sudo apt -y install htop vim tmux zsh curl synapse > /dev/null 2>&1;
     sudo apt -y install htop vim zsh curl synapse > /dev/null 2>&1;
 
@@ -116,8 +118,12 @@ main()
 
 env_install()
 {
-    env_software=(mariadb nginx php);
-    sudo apt update && sudo apt -y full-upgrade;
+
+    cd $HOME/myautoconfig/;
+    git pull;
+    
+	env_software=(mariadb nginx php);
+    #sudo apt update && sudo apt -y full-upgrade;
     sudo apt -y install mariadb-server-10.1 mariadb-client-10.1 nginx php7.1-dev php7.1-fpm curl > /dev/null 2>&1;
     for env_sw in ${env_software[*]};
     do
@@ -133,8 +139,22 @@ env_install()
     cd $HOME;
 	composer create-project topthink/think=5.1.* tp5  --prefer-dist;
 	sudo ln -s $HOME/tp5/ /var/www/html/;
+    echo -e "ThinkPHP5 installed.";
 
     exit 0;
+}
+
+env_update()
+{
+    cd $HOME/myautoconfig/;
+    git pull;
+    if [ $? = 0 ] ; then
+        echo -e "$0 updated [\033[;32mFinish\033[;m].";
+        return 0;
+    else
+        echo -e "$0 updated [\033[;31mFaile\033[;m].";
+        return 1;
+    fi
 }
 
 update()
@@ -167,6 +187,9 @@ if [ $# -ge 0 -a $# -le 1 ]; then
             exit 0;
             ;;
         env_install) echo "$0 start install environment..." && env_install;
+            exit 0;
+            ;;
+        env_update) echo "$0 start update environment..." && env_update;
             exit 0;
             ;;
         *) echo -e "Usage:$0 [ \033[;32minstall\033[;m | \033[;32mupdate\033[;m ]";
