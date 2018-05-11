@@ -59,6 +59,7 @@ nginx_config()
 {
     echo "nginx_config...";
 	nginx -v
+	sudo rm -f /etc/nginx/sites-enabled/default;
 	sudo  ln -s $HOME/myautoconfig/dotfiles/env_config_file/default  /etc/nginx/sites-enabled/default
     sudo systemctl start nginx && sudo systemctl enable nginx && sudo systemctl restart nginx;
     if [ $? = 0 ] ; then
@@ -72,6 +73,7 @@ php_config()
 {
     echo "php_config...";
 	php -v;
+	sudo rm -f /etc/php/7.1/cli/php.ini;
 	sudo ln -s $HOME/myautoconfig/dotfiles/env_config_file/php.ini /etc/php/7.1/cli/php.ini;
 	curl -sS https://getcomposer.org/installer | php;
 	sudo mv composer.phar /usr/local/bin/composer;
