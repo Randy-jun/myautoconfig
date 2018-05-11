@@ -47,7 +47,7 @@ mariadb_config()
 {
     echo "mariadb_config...";
 	mysql -v
-    sudo systemctl restart mariadb && sudo systemctl enable mariadb;
+    sudo systemctl start mariadb && sudo systemctl enable mariadb && sudo systemctl restart mariadb;
     if [ $? = 0 ] ; then
         return 0;
     else
@@ -60,7 +60,7 @@ nginx_config()
     echo "nginx_config...";
 	nginx -v
 	sudo cat $HOME/myautoconfig/dotfiles/env_config_file/default > /etc/nginx/sites-enabled/default
-    sudo systemctl restart nginx && sudo systemctl enable nginx;
+    sudo systemctl start nginx && sudo systemctl enable nginx && sudo systemctl restart nginx;
     if [ $? = 0 ] ; then
         return 0;
     else
@@ -77,7 +77,7 @@ php_config()
 	sudo mv composer.phar /usr/local/bin/composer;
 	composer config -g repo.packagist composer https://packagist.phpcomposer.com;
 	composer self-update;
-    sudo systemctl restart php7.1-fpm && sudo systemctl enable php7.1-fpm;
+    sudo systemctl start php7.1-fpm && sudo systemctl enable php7.1-fpm && sudo systemctl restart php7.1-fpm;
     if [ $? = 0 ] ; then
         return 0;
     else
