@@ -148,6 +148,12 @@ env_update()
 {
     cd $HOME/myautoconfig/;
     git pull;
+
+	sudo cat $HOME/myautoconfig/dotfiles/env_config_file/default > /etc/nginx/sites-enabled/default;
+    sudo systemctl restart nginx;
+	sudo cat $HOME/myautoconfig/dotfiles/env_config_file/php.ini > /etc/php/7.1/cli/php.ini;
+    sudo systemctl restart ginx;
+    sudo systemctl restart php7.1-fpm;
     if [ $? = 0 ] ; then
         echo -e "$0 updated [\033[;32mFinish\033[;m].";
         return 0;
