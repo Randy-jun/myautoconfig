@@ -73,7 +73,8 @@ php_config()
 {
     echo "php_config...";
 	php -v;
-	curl -sS https://getcomposer.org/installer | php;
+	# curl -sS https://getcomposer.org/installer | php;
+	curl -sS https://install.phpcomposer.com/installer | php; # in domain
 	sudo mv composer.phar /usr/local/bin/composer;
 	composer config -g repo.packagist composer https://packagist.phpcomposer.com;
 	composer self-update;
