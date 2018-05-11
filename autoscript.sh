@@ -59,7 +59,7 @@ nginx_config()
 {
     echo "nginx_config...";
 	nginx -v
-	sudo cat $HOME/myautoconfig/dotfiles/env_config_file/default > /etc/nginx/sites-enabled/default
+	sudo  ln -s $HOME/myautoconfig/dotfiles/env_config_file/default  /etc/nginx/sites-enabled/default
     sudo systemctl start nginx && sudo systemctl enable nginx && sudo systemctl restart nginx;
     if [ $? = 0 ] ; then
         return 0;
@@ -72,7 +72,7 @@ php_config()
 {
     echo "php_config...";
 	php -v;
-	sudo cat $HOME/myautoconfig/dotfiles/env_config_file/php.ini > /etc/php/7.1/cli/php.ini;
+	sudo ln -s $HOME/myautoconfig/dotfiles/env_config_file/php.ini /etc/php/7.1/cli/php.ini;
 	curl -sS https://getcomposer.org/installer | php;
 	sudo mv composer.phar /usr/local/bin/composer;
 	composer config -g repo.packagist composer https://packagist.phpcomposer.com;
@@ -149,10 +149,8 @@ env_update()
     cd $HOME/myautoconfig/;
     git pull;
 
-	sudo cat $HOME/myautoconfig/dotfiles/env_config_file/default > /etc/nginx/sites-enabled/default;
-    sudo systemctl restart nginx;
-	sudo cat $HOME/myautoconfig/dotfiles/env_config_file/php.ini > /etc/php/7.1/cli/php.ini;
     sudo systemctl restart ginx;
+    sudo systemctl restart mariadb;
     sudo systemctl restart php7.1-fpm;
     if [ $? = 0 ] ; then
         echo -e "$0 updated [\033[;32mFinish\033[;m].";
