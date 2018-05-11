@@ -46,7 +46,7 @@ pip_config()
 mariadb_config()
 {
     echo "mariadb_config...";
-	mysql -v
+	mysql -V
     sudo systemctl start mariadb && sudo systemctl enable mariadb && sudo systemctl restart mariadb;
     if [ $? = 0 ] ; then
         return 0;
@@ -73,12 +73,12 @@ php_config()
 {
     echo "php_config...";
 	php -v;
-	sudo rm -f /etc/php/7.1/cli/php.ini;
-	sudo ln -s $HOME/myautoconfig/dotfiles/env_config_file/php.ini /etc/php/7.1/cli/php.ini;
 	curl -sS https://getcomposer.org/installer | php;
 	sudo mv composer.phar /usr/local/bin/composer;
 	composer config -g repo.packagist composer https://packagist.phpcomposer.com;
 	composer self-update;
+	sudo rm -f /etc/php/7.1/cli/php.ini;
+	sudo ln -s $HOME/myautoconfig/dotfiles/env_config_file/php.ini /etc/php/7.1/cli/php.ini;
     sudo systemctl start php7.1-fpm && sudo systemctl enable php7.1-fpm && sudo systemctl restart php7.1-fpm;
     if [ $? = 0 ] ; then
         return 0;
