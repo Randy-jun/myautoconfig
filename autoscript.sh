@@ -151,7 +151,8 @@ env_install()
 	composer create-project phpmyadmin/phpmyadmin;
 	sudo ln -s $HOME/phpmyadmin/ /var/www/;
     echo -e "phpmyadmin installed.";
-
+	 
+	sudo $HOME/myautoconfig/host_wrtie.sh
     exit 0;
 }
 

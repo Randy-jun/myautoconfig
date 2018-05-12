@@ -41,9 +41,9 @@ server {
 	root /var/www/html;
 
 	# Add index.php to the list if you are using PHP
-	index index.html index.htm index.nginx-debian.html;
+	index index.php index.html index.htm index.nginx-debian.html;
 
-	server_name _;
+	server_name test.localhost;
 
 	location / {
 		# First attempt to serve request as file, then
@@ -76,16 +76,51 @@ server {
 # You can move that to a different file under sites-available/ and symlink that
 # to sites-enabled/ to enable it.
 #
-#server {
-#	listen 80;
-#	listen [::]:80;
-#
-#	server_name example.com;
-#
-#	root /var/www/example.com;
-#	index index.html;
-#
-#	location / {
-#		try_files $uri $uri/ =404;
-#	}
-#}
+server {
+	listen 80;
+	listen [::]:80;
+
+	server_name tp5;
+
+	root /var/www/tp5.localhost;
+	index index.php index.html;
+
+	location / {
+		try_files $uri $uri/ =404;
+	}
+
+	# pass PHP scripts to FastCGI server
+	#
+	location ~ \.php$ {
+		include snippets/fastcgi-php.conf;
+	
+	#	# With php-fpm (or other unix sockets):
+		fastcgi_pass unix:/var/run/php/php7.1-fpm.sock;
+	#	# With php-cgi (or other tcp sockets):
+	#	fastcgi_pass 127.0.0.1:9000;
+	}
+}
+server {
+	listen 80;
+	listen [::]:80;
+
+	server_name phpmyadmin.localhost;
+
+	root /var/www/phpmyadmin;
+	index index.php index.html;
+
+	location / {
+		try_files $uri $uri/ =404;
+	}
+
+	# pass PHP scripts to FastCGI server
+	#
+	location ~ \.php$ {
+		include snippets/fastcgi-php.conf;
+	
+	#	# With php-fpm (or other unix sockets):
+		fastcgi_pass unix:/var/run/php/php7.1-fpm.sock;
+	#	# With php-cgi (or other tcp sockets):
+	#	fastcgi_pass 127.0.0.1:9000;
+	}
+}
