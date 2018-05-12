@@ -43,7 +43,7 @@ server {
 	# Add index.php to the list if you are using PHP
 	index index.php index.html index.htm index.nginx-debian.html;
 
-	server_name test.localhost;
+	server_name test.com;
 
 	location / {
 		# First attempt to serve request as file, then
@@ -80,9 +80,9 @@ server {
 	listen 80;
 	listen [::]:80;
 
-	server_name tp5;
+	server_name tp5.com;
 
-	root /var/www/tp5.localhost;
+	root /var/www/tp5;
 	index index.php index.html;
 
 	location / {
@@ -104,7 +104,7 @@ server {
 	listen 80;
 	listen [::]:80;
 
-	server_name phpmyadmin.localhost;
+	server_name phpmyadmin.com;
 
 	root /var/www/phpmyadmin;
 	index index.php index.html;
