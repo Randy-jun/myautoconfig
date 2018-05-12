@@ -129,7 +129,7 @@ env_install()
     
 	env_software=(mariadb nginx php);
     #sudo apt update && sudo apt -y full-upgrade;
-    sudo apt -y install mariadb-server-10.1 mariadb-client-10.1 nginx php7.1-dev php7.1-fpm curl > /dev/null 2>&1;
+    sudo apt -y install mariadb-server-10.1 mariadb-client-10.1 nginx php7.1-dev php7.1-fpm php7.1-mbstring php7.1-mysql curl > /dev/null 2>&1;
     for env_sw in ${env_software[*]};
     do
         ${env_sw}'_config';
