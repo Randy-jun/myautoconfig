@@ -77,7 +77,7 @@ php_config()
 	curl -sS https://install.phpcomposer.com/installer | php; # in domain
 	sudo mv composer.phar /usr/local/bin/composer;
 	composer config -g repo.packagist composer https://packagist.phpcomposer.com;
-	composer self-update;
+	# composer self-update;
 	sudo rm -f /etc/php/7.1/cli/php.ini;
 	sudo ln -s $HOME/myautoconfig/dotfiles/env_config_file/php.ini /etc/php/7.1/cli/php.ini;
     sudo systemctl start php7.1-fpm && sudo systemctl enable php7.1-fpm && sudo systemctl restart php7.1-fpm;
@@ -140,9 +140,17 @@ env_install()
     done
     echo -e "ThinkPHP5 install.";
     cd $HOME;
+
+	sudo ln -s $HOME/myautoconfig/dotfiles/env_config_files/index.php /var/www/html;
+
 	composer create-project topthink/think=5.1.* tp5  --prefer-dist;
-	sudo ln -s $HOME/tp5/ /var/www/html/;
+	sudo ln -s $HOME/tp5/ /var/www/;
     echo -e "ThinkPHP5 installed.";
+
+    echo -e "phpmyadmin install.";
+	composer create-project phpmyadmin/phpmyadmin;
+	sudo ln -s $HOME/phpmyadmin/ /var/www/;
+    echo -e "phpmyadmin installed.";
 
     exit 0;
 }
