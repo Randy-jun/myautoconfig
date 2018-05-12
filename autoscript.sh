@@ -141,7 +141,7 @@ env_install()
     echo -e "ThinkPHP5 install.";
     cd $HOME;
 
-	sudo ln -s $HOME/myautoconfig/dotfiles/env_config_files/index.php /var/www/html;
+	sudo ln -s $HOME/myautoconfig/dotfiles/env_config_file/index.php /var/www/html/;
 
 	composer create-project topthink/think=5.1 $HOME/tp5  --prefer-dist;
 	sudo ln -s $HOME/tp5/ /var/www/;
