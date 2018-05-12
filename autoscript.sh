@@ -143,12 +143,12 @@ env_install()
 
 	sudo ln -s $HOME/myautoconfig/dotfiles/env_config_files/index.php /var/www/html;
 
-	composer create-project topthink/think=5.1.* tp5  --prefer-dist;
+	composer create-project topthink/think=5.1.* $HOME/tp5  --prefer-dist;
 	sudo ln -s $HOME/tp5/ /var/www/;
     echo -e "ThinkPHP5 installed.";
 
     echo -e "phpmyadmin install.";
-	composer create-project phpmyadmin/phpmyadmin;
+	composer create-project phpmyadmin/phpmyadmin $HOME/phpmyadmin;
 	sudo ln -s $HOME/phpmyadmin/ /var/www/;
     echo -e "phpmyadmin installed.";
 	 
