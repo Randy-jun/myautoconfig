@@ -79,7 +79,9 @@ php_config()
 	composer config -g repo.packagist composer https://packagist.phpcomposer.com;
 	# composer self-update;
 	sudo rm -f /etc/php/7.1/fpm/php.ini;
+	sudo rm -f /etc/php/7.1/cli/php.ini;
 	sudo ln $HOME/myautoconfig/dotfiles/env_config_file/php.ini /etc/php/7.1/fpm/php.ini;
+	sudo ln $HOME/myautoconfig/dotfiles/env_config_file/php.ini /etc/php/7.1/cli/php.ini;
     sudo systemctl start php7.1-fpm && sudo systemctl enable php7.1-fpm && sudo systemctl restart php7.1-fpm;
     if [ $? = 0 ] ; then
         return 0;
