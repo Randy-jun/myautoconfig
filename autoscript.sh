@@ -135,9 +135,15 @@ env_install()
 	sw_web="nginx";
 	sw_php="curl php7.1-dev php7.1-fpm php7.1-mbstring php7.1-mysql";
 	sw_phpmyadmin_must="php7.1-xml php7.1-curl phpunit phpunit-selenium";
-	sw_phpmyadmin_improve="php-invoker php-bz2 php-zip php-opcahe php-gd php-gmp php-libsodium php-xdebug php-soap";
+	sw_phpmyadmin_improve="php-invoker php-bz2 php-zip php-opcache php-gd php-gmp php-libsodium php-xdebug php-soap";
     # sudo apt -y install mariadb-server-10.1 mariadb-client-10.1 nginx php7.1-dev php7.1-fpm php7.1-mbstring php7.1-mysql php7.1-xml php7.1-curl phpunit phpunit-selenium curl > /dev/null 2>&1;
 	sudo apt -y install ${sw_db} ${sw_web} ${sw_php} ${sw_phpmyadmin_must} ${sw_phpmyadmin_improve};
+    if [ $? = 0 ] ; then
+        echo -e "Software has been installed [\033[;32mFinish\033[;m].";
+    else
+        echo -e "Software has been installed [\033[;31mFaile\033[;m].";
+        exit 1;
+    fi
     for env_sw in ${env_software[*]};
     do
         ${env_sw}'_config';
