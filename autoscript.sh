@@ -48,7 +48,7 @@ mariadb_config()
     echo "mariadb_config...";
 	mysql -V;
     # sudo systemctl start mariadb && sudo systemctl enable mariadb && sudo systemctl restart mariadb;
-	sudo mysqsl_secure_installation;
+	sudo mysql_secure_installation;
     sudo systemctl enable mariadb && sudo systemctl restart mariadb || sudo systemctl start;
     if [ $? = 0 ] ; then
         return 0;
