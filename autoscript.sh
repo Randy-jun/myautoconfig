@@ -48,7 +48,7 @@ mariadb_config()
     echo "mariadb_config...";
 	mysql -V;
     # sudo systemctl start mariadb && sudo systemctl enable mariadb && sudo systemctl restart mariadb;
-	sudo mysql_secure_installation;
+	sudo $HOME/myautoconfig/mariadb.sh;
     sudo systemctl enable mariadb && sudo systemctl restart mariadb || sudo systemctl start;
     if [ $? = 0 ] ; then
         return 0;
@@ -170,7 +170,7 @@ env_install()
 	composer update && cd $HOME;
     echo -e "phpmyadmin installed.";
 	 
-	sudo $HOME/myautoconfig/host_wrtie.sh
+	sudo $HOME/myautoconfig/host_wrtie.sh;
     exit 0;
 }
 
