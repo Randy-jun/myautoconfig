@@ -48,17 +48,17 @@ mariadb_config()
     echo "mariadb_config...";
 	mysql -V;
     # sudo systemctl start mariadb && sudo systemctl enable mariadb && sudo systemctl restart mariadb;
-	systemctl status nginx;
     echo "mariadb_config..1";
-	sudo systemctl start nginx;
-	systemctl status nginx;
+	systemctl status mariadb;
     echo "mariadb_config..2";
-	sudo $HOME/myautoconfig/mariadb.sh;
-	systemctl status nginx;
-    echo "mariadb_config..3";
     sudo systemctl enable mariadb && sudo systemctl restart mariadb || sudo systemctl start;
-	systemctl status nginx;
+    echo "mariadb_config..3";
+	systemctl status mariadb;
     echo "mariadb_config..4";
+	sudo $HOME/myautoconfig/mariadb.sh;
+    echo "mariadb_config..5";
+	systemctl status mariadb;
+    echo "mariadb_config..6";
     if [ $? = 0 ] ; then
         return 0;
     else
