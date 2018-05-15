@@ -48,8 +48,8 @@ mariadb_config()
     echo "mariadb_config...";
 	mysql -V;
     # sudo systemctl start mariadb && sudo systemctl enable mariadb && sudo systemctl restart mariadb;
-	sudo systemctl stop nginx || sudo systemctl start nginx;
-	sudo $HOME/myautoconfig/mariadb.sh;
+	sudo systemctl start nginx;
+	$HOME/myautoconfig/mariadb.sh;
     sudo systemctl enable mariadb && sudo systemctl restart mariadb || sudo systemctl start;
     if [ $? = 0 ] ; then
         return 0;
@@ -132,7 +132,7 @@ env_install()
     cd $HOME/myautoconfig/;
     git pull;
     
-	env_software=(mariadb nginx php);
+	env_software=(mariadb php nginx);
     #sudo apt update && sudo apt -y full-upgrade;
 	sw_db="mariadb-server-10.1 mariadb-client-10.1";
 	sw_web="nginx";
