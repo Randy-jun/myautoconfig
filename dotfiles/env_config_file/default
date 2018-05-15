@@ -82,7 +82,7 @@ server {
 
 	server_name tp5.com;
 
-	root /var/www/tp5;
+	root /var/www/tp5/public/;
 	index index.php index.html;
 
 	location / {
