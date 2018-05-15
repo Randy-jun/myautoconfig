@@ -61,7 +61,7 @@ nginx_config()
 {
     echo "nginx_config...";
 	nginx -v;
-	sudo rm -f /etc/nginx/sites-enabled/default;
+	sudo rm -f /etc/nginx/sites-available/default;
 	sudo  ln $HOME/myautoconfig/dotfiles/env_config_file/default  /etc/nginx/sites-available/default;
     sudo systemctl start enable && sudo systemctl restart nginx || sudo systemctl start nginx;
     if [ $? = 0 ] ; then
