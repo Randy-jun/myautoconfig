@@ -1,2 +1,2 @@
 #!/bin/bash
-mysql_secure_installation;
+sudo mysql_secure_installation;

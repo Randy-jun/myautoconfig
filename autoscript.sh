@@ -48,6 +48,7 @@ mariadb_config()
     echo "mariadb_config...";
 	mysql -V;
     # sudo systemctl start mariadb && sudo systemctl enable mariadb && sudo systemctl restart mariadb;
+	sudo systemctl stop nginx || sudo systemctl start nginx;
 	sudo $HOME/myautoconfig/mariadb.sh;
     sudo systemctl enable mariadb && sudo systemctl restart mariadb || sudo systemctl start;
     if [ $? = 0 ] ; then
@@ -62,8 +63,9 @@ nginx_config()
     echo "nginx_config...";
 	nginx -v;
 	sudo rm -f /etc/nginx/sites-available/default;
+	sudo systemctl stop nginx;
 	sudo  ln $HOME/myautoconfig/dotfiles/env_config_file/default  /etc/nginx/sites-available/default;
-    sudo systemctl start enable && sudo systemctl restart nginx || sudo systemctl start nginx;
+    sudo systemctl enable nginx && sudo systemctl restart nginx || sudo systemctl start nginx;
     if [ $? = 0 ] ; then
         return 0;
     else
@@ -76,6 +78,7 @@ php_config()
     echo "php_config...";
 	php -v;
 	# curl -sS https://getcomposer.org/installer | php;
+	sudo systemctl stop php7.1-fpm;
 	curl -sS https://install.phpcomposer.com/installer | php; # in domain
 	sudo mv composer.phar /usr/local/bin/composer;
 	composer config -g repo.packagist composer https://packagist.phpcomposer.com;
