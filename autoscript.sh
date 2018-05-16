@@ -49,7 +49,7 @@ mariadb_config()
 	mysql -V;
     # sudo systemctl start mariadb && sudo systemctl enable mariadb && sudo systemctl restart mariadb;
     echo "systemctl enable mariadb_config...";
-    sudo systemctl enable mariadb && sudo systemctl restart mariadb || sudo systemctl start;
+    sudo systemctl enable mariadb.service && sudo systemctl restart mariadb.service || sudo systemctl start mariadb.service;
     echo "systemctl enable mariadb_config...";
 	sudo $HOME/myautoconfig/mariadb.sh;
     if [ $? = 0 ] ; then
@@ -64,10 +64,10 @@ nginx_config()
     echo "nginx_config...";
 	nginx -v;
 	sudo rm -f /etc/nginx/sites-available/default;
-	sudo systemctl stop nginx;
+	sudo systemctl stop nginx.service;
     echo "systemctl enable nginx_config...";
 	sudo  ln $HOME/myautoconfig/dotfiles/env_config_file/default  /etc/nginx/sites-available/default;
-    sudo systemctl enable nginx && sudo systemctl restart nginx || sudo systemctl start nginx;
+    sudo systemctl enable nginx.service && sudo systemctl restart nginx.service || sudo systemctl start nginx.service;
     echo "systemctl enable nginx_config...";
     if [ $? = 0 ] ; then
         return 0;
@@ -81,7 +81,7 @@ php_config()
     echo "php_config...";
 	php -v;
 	# curl -sS https://getcomposer.org/installer | php;
-	sudo systemctl stop php7.1-fpm;
+	sudo systemctl stop php7.1-fpm.service;
 	curl -sS https://install.phpcomposer.com/installer | php; # in domain
 	sudo mv composer.phar /usr/local/bin/composer;
 	composer config -g repo.packagist composer https://packagist.phpcomposer.com;
@@ -91,7 +91,7 @@ php_config()
 	sudo ln $HOME/myautoconfig/dotfiles/env_config_file/php.ini /etc/php/7.1/fpm/php.ini;
 	sudo ln $HOME/myautoconfig/dotfiles/env_config_file/php.ini /etc/php/7.1/cli/php.ini;
     echo "systemctl enable php7.1-fpm_config...";
-    sudo systemctl enable php7.1-fpm && sudo systemctl restart php7.1-fpm && sudo systemctl start php7.1-fpm;
+    sudo systemctl enable php7.1-fpm.service && sudo systemctl restart php7.1-fpm.service&& sudo systemctl start php7.1-fpm.service;
     echo "systemctl enable php7.1-fpm_config...";
     if [ $? = 0 ] ; then
         return 0;
@@ -187,9 +187,9 @@ env_update()
     cd $HOME/myautoconfig/;
     git pull;
 
-    sudo systemctl restart ginx;
-    sudo systemctl restart mariadb;
-    sudo systemctl restart php7.1-fpm;
+    sudo systemctl restart nginx.service || sudo systemctl restart nginx.service;
+    sudo systemctl restart mariadb.service || sudo systemctl restart mariadb.service;
+    sudo systemctl restart php7.1-fpm.service || sudo systemctl restart php7.1-fpm.service;
     if [ $? = 0 ] ; then
         echo -e "$0 updated [\033[;32mFinish\033[;m].";
         return 0;
