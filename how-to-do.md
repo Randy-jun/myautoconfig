@@ -93,14 +93,12 @@
 + sudo $HOME/myautoconfig/mariadb.sh;
 + mariadb.sh
 + ====================
-+ /#!/bin/bash
-+ /# sudo mysql_secure_installation; -- (设置mysql可以先不用)
++ \#!/bin/bash
++ \# sudo mysql_secure_installation; -- (设置mysql可以先不用)
 + sudo mysql --user=root < ./create_phpmyadmin_user.sql;
++ 
 + create_phpmyadmin_user.sql
 + ====================
-+ #!/bin/bash
-+ # sudo mysql_secure_installation; -- （设置mysql可以先不用）
-+ sudo mysql --user=root < ./create_phpmyadmin_user.sql;
 + /**********Allow access from localhost********/
 + use mysql;
 + CREATE USER 'phpmyadmin'@'localhost' IDENTIFIED BY 'mysql_passwd';
