@@ -48,7 +48,9 @@ mariadb_config()
     echo "mariadb_config...";
 	mysql -V;
     # sudo systemctl start mariadb && sudo systemctl enable mariadb && sudo systemctl restart mariadb;
+    echo "systemctl enable mariadb_config...";
     sudo systemctl enable mariadb && sudo systemctl restart mariadb || sudo systemctl start;
+    echo "systemctl enable mariadb_config...";
 	sudo $HOME/myautoconfig/mariadb.sh;
     if [ $? = 0 ] ; then
         return 0;
@@ -63,8 +65,10 @@ nginx_config()
 	nginx -v;
 	sudo rm -f /etc/nginx/sites-available/default;
 	sudo systemctl stop nginx;
+    echo "systemctl enable nginx_config...";
 	sudo  ln $HOME/myautoconfig/dotfiles/env_config_file/default  /etc/nginx/sites-available/default;
     sudo systemctl enable nginx && sudo systemctl restart nginx || sudo systemctl start nginx;
+    echo "systemctl enable nginx_config...";
     if [ $? = 0 ] ; then
         return 0;
     else
@@ -86,7 +90,9 @@ php_config()
 	sudo rm -f /etc/php/7.1/cli/php.ini;
 	sudo ln $HOME/myautoconfig/dotfiles/env_config_file/php.ini /etc/php/7.1/fpm/php.ini;
 	sudo ln $HOME/myautoconfig/dotfiles/env_config_file/php.ini /etc/php/7.1/cli/php.ini;
+    echo "systemctl enable php7.1-fpm_config...";
     sudo systemctl enable php7.1-fpm && sudo systemctl restart php7.1-fpm && sudo systemctl start php7.1-fpm;
+    echo "systemctl enable php7.1-fpm_config...";
     if [ $? = 0 ] ; then
         return 0;
     else
