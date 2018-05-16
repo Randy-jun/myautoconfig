@@ -80,9 +80,11 @@
 
 
 ## 6. Thinkphp5安装
-+ 1. cd ~
-+ 2. composer create-project topthink/think=5.1.* $HOME/tp5  --prefer-dist;
-+ 3. sudo ln -s ~/tp5/ /var/www/;
+```
+cd ~
+composer create-project topthink/think=5.1.* $HOME/tp5  --prefer-dist;
+sudo ln -s ~/tp5/ /var/www/;
+```
 
 ## 7. phpmyadmin安装
 1. 先安装必装软件sudo apt install php7.1-xml php7.1-curl phpunit phpunit-selenium
@@ -90,38 +92,42 @@
 3. composer create-project phpmyadmin/phpmyadmin $HOME/phpmyadmin;
 4. sudo ln -s $HOME/phpmyadmin/ /var/www/;
 5. 为Mariadb添加phpmyadmin用户并分配权限
-+ sudo $HOME/myautoconfig/mariadb.sh;
+```
+sudo $HOME/myautoconfig/mariadb.sh;
+```
 + mariadb.sh
-+ ====================
-+ \#!/bin/bash
-+ \# sudo mysql_secure_installation; -- (设置mysql可以先不用)
-+ sudo mysql --user=root < ./create_phpmyadmin_user.sql;
-+ 
-+ create_phpmyadmin_user.sql
-+ ====================
-+ /**********Allow access from localhost********/
-+ use mysql;
-+ CREATE USER 'phpmyadmin'@'localhost' IDENTIFIED BY 'mysql_passwd';
-+ GRANT ALL PRIVILEGES ON *.* TO 'phpmyadmin'@'localhost' WITH GRANT OPTION;
-+ FLUSH PRIVILEGES;
-+ /******************************************/
-+ 
-+ /**********Allow access from remote********
-+ * use mysql;
-+ * CREATE USER 'phpmyadmin'@'localhost' IDENTIFIED BY 'mysql_passwd';
-+ * GRANT ALL PRIVILEGES ON \*.\* TO 'phpmyadmin'@'localhost' WITH GRANT OPTION;
-+ * FLUSH PRIVILEGES;
-+ */
+```
+#!/bin/bash
+# sudo mysql_secure_installation; -- (设置mysql可以先不用)
+sudo mysql --user=root < ./create_phpmyadmin_user.sql;
+create_phpmyadmin_user.sql
+```
+```
+/**********Allow access from localhost********/
+use mysql;
+CREATE USER 'phpmyadmin'@'localhost' IDENTIFIED BY 'mysql_passwd';
+GRANT ALL PRIVILEGES ON *.* TO 'phpmyadmin'@'localhost' WITH GRANT OPTION;
+FLUSH PRIVILEGES;
+/******************************************/
 
+/**********Allow access from remote********
+* use mysql;
+* CREATE USER 'phpmyadmin'@'localhost' IDENTIFIED BY 'mysql_passwd';
+* GRANT ALL PRIVILEGES ON \*.\* TO 'phpmyadmin'@'localhost' WITH GRANT OPTION;
+* FLUSH PRIVILEGES;
+*/
+```
 ## 7. 修改/etc/hosts文件
-+ sudo $HOME/myautoconfig/host_wrtie.sh;
+```
+sudo $HOME/myautoconfig/host_wrtie.sh;
+```
 + host_write.sh
-+ ============
-+ #!/bin/bash
-+ echo "127.0.0.1 tp5.io" >> /etc/hosts
-+ echo "127.0.0.1 phpmyadmin.io" >> /etc/hosts
-+ echo "127.0.0.1 test.io" >> /etc/hosts
-
+```
+#!/bin/bash
+echo "127.0.0.1 tp5.io" >> /etc/hosts
+echo "127.0.0.1 phpmyadmin.io" >> /etc/hosts
+echo "127.0.0.1 test.io" >> /etc/hosts
+```
 
 ## CentOS安装后部分配置
 ### 安装SSH
