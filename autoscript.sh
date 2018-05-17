@@ -187,14 +187,20 @@ env_update()
     cd $HOME/myautoconfig/;
     git pull;
 
-    sudo systemctl restart nginx.service || sudo systemctl restart nginx.service;
-    sudo systemctl restart mariadb.service || sudo systemctl restart mariadb.service;
-    sudo systemctl restart php7.1-fpm.service || sudo systemctl restart php7.1-fpm.service;
+    echo -e "Start nginx service...";
+    sudo systemctl start nginx.service || sudo systemctl restart nginx.service;
+    echo -e "Nginx service is [\033[;32mOK!\033[;m]";
+    echo -e "Start mariadb service...";
+    sudo systemctl start mariadb.service || sudo systemctl restart mariadb.service;
+    echo -e "Mariadb service is [\033[;32mOK!\033[;m]";
+    echo -e "Start php-fpm service...";
+    sudo systemctl start php7.1-fpm.service || sudo systemctl restart php7.1-fpm.service;
+    echo -e "PHP-FPM service is [\033[;32mOK!\033[;m]";
     if [ $? = 0 ] ; then
-        echo -e "$0 updated [\033[;32mFinish\033[;m].";
+        echo -e "$0 env_updated [\033[;32mFinish\033[;m].";
         return 0;
     else
-        echo -e "$0 updated [\033[;31mFaile\033[;m].";
+        echo -e "$0 env_updated [\033[;31mFaile\033[;m].";
         return 1;
     fi
 }
