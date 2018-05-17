@@ -52,7 +52,7 @@ mariadb_config()
     echo "systemctl enable mariadb_config...";
     sudo systemctl enable mariadb.service && sudo systemctl restart mariadb.service || sudo systemctl start mariadb.service;
     echo "systemctl enable mariadb_config...";
-	sudo ${HOME_DIR}/mariadb.sh;
+	sudo sh -c ${HOME_DIR}/mariadb.sh;
     if [ $? = 0 ] ; then
         return 0;
     else
@@ -103,7 +103,6 @@ php_config()
 
 main()
 {
-	HOME_DIR=$(pwd);
     #sudo apt update && sudo apt -y full-upgrade;
     #sudo apt -y install htop vim tmux zsh curl synapse > /dev/null 2>&1;
     sudo apt -y install htop vim zsh curl synapse > /dev/null 2>&1;
@@ -136,7 +135,7 @@ main()
 env_install()
 {
 
-    cd ${HOME_DIR}/myautoconfig/;
+    cd ${HOME_DIR};
     git pull;
     
 	env_software=(mariadb php nginx);
@@ -180,7 +179,7 @@ env_install()
 	composer update && cd ${HOME};
     echo -e "phpmyadmin installed.";
 	 
-	sudo ${HOME_DIR}/host_wrtie.sh;
+	sudo sh -c ${HOME_DIR}/host_wrtie.sh;
     exit 0;
 }
 
@@ -222,6 +221,7 @@ update()
 
 DATE=$(date);
 sudo echo "Time is $DATE";
+HOME_DIR=$(pwd);
 
 if [ $# -ge 0 -a $# -le 1 ]; then
     if [ $# -eq 0 ]; then
