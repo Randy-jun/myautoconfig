@@ -3,7 +3,7 @@
 tmux_config()
 {
     git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm > /dev/null 2>&1 &&
-    ln -s $HOME/myautoconfig/dotfiles/tmux.conf $HOME/.tmux.conf > /dev/null 2>&1;
+    ln -s ${HOME_DIR}/dotfiles/tmux.conf ${HOME}/.tmux.conf > /dev/null 2>&1;
     if [ $? = 0 ] ; then
         return 0;
     else
@@ -13,7 +13,7 @@ tmux_config()
 
 vim_config()
 {
-    ln -s $HOME/myautoconfig/dotfiles/vimrc $HOME/.vimrc > /dev/null 2>&1;
+    ln -s ${HOME_DIR}/dotfiles/vimrc $HOME/.vimrc > /dev/null 2>&1;
     if [ $? = 0 ] ; then
         return 0;
     else
@@ -25,7 +25,7 @@ oh_my_zsh_config()
 {
     sudo chsh $LOGNAME -s /bin/zsh > /dev/null 2>&1 &&
     git clone https://github.com/robbyrussell/oh-my-zsh.git $HOME/.oh-my-zsh/ > /dev/null 2>&1 &&
-    ln -s $HOME/myautoconfig/dotfiles/zshrc $HOME/.zshrc > /dev/null 2>&1;
+    ln -s ${HOME_DIR}/dotfiles/zshrc $HOME/.zshrc > /dev/null 2>&1;
     if [ $? = 0 ] ; then
         return 0;
     else
@@ -35,7 +35,7 @@ oh_my_zsh_config()
 
 pip_config()
 {
-    sudo ln -s $HOME/myautoconfig/dotfiles/pip.conf /etc/pip.conf > /dev/null 2>&1;
+    sudo ln -s ${HOME_DIR}/dotfiles/pip.conf /etc/pip.conf > /dev/null 2>&1;
     if [ $? = 0 ] ; then
         return 0;
     else
@@ -48,10 +48,11 @@ mariadb_config()
     echo "mariadb_config...";
 	mysql -V;
     # sudo systemctl start mariadb && sudo systemctl enable mariadb && sudo systemctl restart mariadb;
+    sudo systemctl stop mariadb.service;
     echo "systemctl enable mariadb_config...";
     sudo systemctl enable mariadb.service && sudo systemctl restart mariadb.service || sudo systemctl start mariadb.service;
     echo "systemctl enable mariadb_config...";
-	sudo $HOME/myautoconfig/mariadb.sh;
+	sudo ${HOME_DIR}/mariadb.sh;
     if [ $? = 0 ] ; then
         return 0;
     else
@@ -66,7 +67,7 @@ nginx_config()
 	sudo rm -f /etc/nginx/sites-available/default;
 	sudo systemctl stop nginx.service;
     echo "systemctl enable nginx_config...";
-	sudo  ln $HOME/myautoconfig/dotfiles/env_config_file/default  /etc/nginx/sites-available/default;
+	sudo ln ${HOME_DIR}/dotfiles/env_config_file/default  /etc/nginx/sites-available/default;
     sudo systemctl enable nginx.service && sudo systemctl restart nginx.service || sudo systemctl start nginx.service;
     echo "systemctl enable nginx_config...";
     if [ $? = 0 ] ; then
@@ -88,10 +89,10 @@ php_config()
 	# composer self-update;
 	sudo rm -f /etc/php/7.1/fpm/php.ini;
 	sudo rm -f /etc/php/7.1/cli/php.ini;
-	sudo ln $HOME/myautoconfig/dotfiles/env_config_file/php.ini /etc/php/7.1/fpm/php.ini;
-	sudo ln $HOME/myautoconfig/dotfiles/env_config_file/php.ini /etc/php/7.1/cli/php.ini;
+	sudo ln ${HOME_DIR}/dotfiles/env_config_file/php.ini /etc/php/7.1/fpm/php.ini;
+	sudo ln ${HOME_DIR}/dotfiles/env_config_file/php.ini /etc/php/7.1/cli/php.ini;
     echo "systemctl enable php7.1-fpm_config...";
-    sudo systemctl enable php7.1-fpm.service && sudo systemctl restart php7.1-fpm.service&& sudo systemctl start php7.1-fpm.service;
+    sudo systemctl enable php7.1-fpm.service && sudo systemctl restart php7.1-fpm.service || sudo systemctl start php7.1-fpm.service;
     echo "systemctl enable php7.1-fpm_config...";
     if [ $? = 0 ] ; then
         return 0;
@@ -102,6 +103,7 @@ php_config()
 
 main()
 {
+	HOME_DIR=$(pwd);
     #sudo apt update && sudo apt -y full-upgrade;
     #sudo apt -y install htop vim tmux zsh curl synapse > /dev/null 2>&1;
     sudo apt -y install htop vim zsh curl synapse > /dev/null 2>&1;
@@ -134,7 +136,7 @@ main()
 env_install()
 {
 
-    cd $HOME/myautoconfig/;
+    cd ${HOME_DIR}/myautoconfig/;
     git pull;
     
 	env_software=(mariadb php nginx);
@@ -165,7 +167,7 @@ env_install()
     echo -e "ThinkPHP5 install.";
     cd $HOME;
 
-	sudo ln -s $HOME/myautoconfig/dotfiles/env_config_file/index.php /var/www/html/;
+	sudo ln -s ${HOME_DIR}/dotfiles/env_config_file/index.php /var/www/html/;
 
 	composer create-project topthink/think=5.1 $HOME/tp5  --prefer-dist;
 	sudo ln -s $HOME/tp5/ /var/www/;
@@ -174,17 +176,17 @@ env_install()
     echo -e "phpmyadmin install.";
 	composer create-project phpmyadmin/phpmyadmin $HOME/phpmyadmin;
 	sudo ln -s $HOME/phpmyadmin/ /var/www/;
-	cd $HOME/phpmyadmin;
-	composer update && cd $HOME;
+	cd ${HOME}/phpmyadmin;
+	composer update && cd ${HOME};
     echo -e "phpmyadmin installed.";
 	 
-	sudo $HOME/myautoconfig/host_wrtie.sh;
+	sudo ${HOME_DIR}/host_wrtie.sh;
     exit 0;
 }
 
 env_update()
 {
-    cd $HOME/myautoconfig/;
+    cd ${HOME_DIR};
     git pull;
 
     echo -e "Start nginx service...";
@@ -207,7 +209,7 @@ env_update()
 
 update()
 {
-    cd $HOME/myautoconfig/;
+    cd ${HOME_DIR};
     git pull;
     if [ $? = 0 ] ; then
         echo -e "$0 updated [\033[;32mFinish\033[;m].";
@@ -245,6 +247,6 @@ if [ $# -ge 0 -a $# -le 1 ]; then
             ;;
     esac
 else
-    echo -e "Usage:$0 [ \033[;32minstall\033[;m | \033[;32mupdate\033[;m ]";
+    echo -e "Usage:$0 [ \033[;32minstall\033[;m | \033[;32mupdate\033[;m ] | \033[;32menv_install\033[;m ] | \033[;32menv_update\033[;m ]";
     exit 0;
 fi
