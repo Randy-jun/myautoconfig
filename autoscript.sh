@@ -120,7 +120,7 @@ main()
         exit 1;
     fi
 
-    # tmux vim oh_my_zsh pip
+    # software=(tmux vim oh_my_zsh pip);
     software=(vim oh_my_zsh pip);
     
     for sw in ${software[*]};
