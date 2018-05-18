@@ -52,13 +52,13 @@ pip_config()
 mariadb_config()
 {
     echo "mariadb_config...";
-	mysql -V;
+    mysql -V;
     # sudo systemctl start mariadb && sudo systemctl enable mariadb && sudo systemctl restart mariadb;
     sudo systemctl stop mariadb.service;
     echo "systemctl enable mariadb_config...";
     sudo systemctl enable mariadb.service && sudo systemctl restart mariadb.service || sudo systemctl start mariadb.service;
     echo "systemctl enable mariadb_config...";
-	sudo sh -c ${HOME_DIR}/mariadb.sh;
+    sudo sh -c ${HOME_DIR}/mariadb.sh;
     if [ $? = 0 ] ; then
         return 0;
     else
@@ -69,11 +69,11 @@ mariadb_config()
 nginx_config()
 {
     echo "nginx_config...";
-	nginx -v;
-	sudo rm -f /etc/nginx/sites-available/default;
-	sudo systemctl stop nginx.service;
+    nginx -v;
+    sudo rm -f /etc/nginx/sites-available/default;
+    sudo systemctl stop nginx.service;
     echo "systemctl enable nginx_config...";
-	sudo ln ${HOME_DIR}/dotfiles/env_config_file/default  /etc/nginx/sites-available/default;
+    sudo ln ${HOME_DIR}/dotfiles/env_config_file/default  /etc/nginx/sites-available/default;
     sudo systemctl enable nginx.service && sudo systemctl restart nginx.service || sudo systemctl start nginx.service;
     echo "systemctl enable nginx_config...";
     if [ $? = 0 ] ; then
@@ -86,17 +86,17 @@ nginx_config()
 php_config()
 {
     echo "php_config...";
-	php -v;
-	# curl -sS https://getcomposer.org/installer | php;
-	sudo systemctl stop php7.1-fpm.service;
-	curl -sS https://install.phpcomposer.com/installer | php; # in domain
-	sudo mv composer.phar /usr/local/bin/composer;
-	composer config -g repo.packagist composer https://packagist.phpcomposer.com;
-	# composer self-update;
-	sudo rm -f /etc/php/7.1/fpm/php.ini;
-	sudo rm -f /etc/php/7.1/cli/php.ini;
-	sudo ln ${HOME_DIR}/dotfiles/env_config_file/php.ini /etc/php/7.1/fpm/php.ini;
-	sudo ln ${HOME_DIR}/dotfiles/env_config_file/php.ini /etc/php/7.1/cli/php.ini;
+    php -v;
+    # curl -sS https://getcomposer.org/installer | php;
+    sudo systemctl stop php7.1-fpm.service;
+    curl -sS https://install.phpcomposer.com/installer | php; # in domain
+    sudo mv composer.phar /usr/local/bin/composer;
+    composer config -g repo.packagist composer https://packagist.phpcomposer.com;
+    # composer self-update;
+    sudo rm -f /etc/php/7.1/fpm/php.ini;
+    sudo rm -f /etc/php/7.1/cli/php.ini;
+    sudo ln ${HOME_DIR}/dotfiles/env_config_file/php.ini /etc/php/7.1/fpm/php.ini;
+    sudo ln ${HOME_DIR}/dotfiles/env_config_file/php.ini /etc/php/7.1/cli/php.ini;
     echo "systemctl enable php7.1-fpm_config...";
     sudo systemctl enable php7.1-fpm.service && sudo systemctl restart php7.1-fpm.service || sudo systemctl start php7.1-fpm.service;
     echo "systemctl enable php7.1-fpm_config...";
@@ -144,15 +144,15 @@ env_install()
     cd ${HOME_DIR};
     git pull;
     
-	env_software=(mariadb php nginx);
+    env_software=(mariadb php nginx);
     #sudo apt update && sudo apt -y full-upgrade;
-	sw_db="mariadb-server-10.1 mariadb-client-10.1";
-	sw_web="nginx";
-	sw_php="curl php7.1-dev php7.1-fpm php7.1-mbstring php7.1-mysql";
-	sw_phpmyadmin_must="php7.1-xml php7.1-curl phpunit phpunit-selenium";
-	sw_phpmyadmin_improve="php-invoker php-bz2 php-zip php-opcache php-gd php-gmp php-libsodium php-xdebug php-soap";
+    sw_db="mariadb-server-10.1 mariadb-client-10.1";
+    sw_web="nginx";
+    sw_php="curl php7.1-dev php7.1-fpm php7.1-mbstring php7.1-mysql";
+    sw_phpmyadmin_must="php7.1-xml php7.1-curl phpunit phpunit-selenium";
+    sw_phpmyadmin_improve="php-invoker php-bz2 php-zip php-opcache php-gd php-gmp php-libsodium php-xdebug php-soap";
     # sudo apt -y install mariadb-server-10.1 mariadb-client-10.1 nginx php7.1-dev php7.1-fpm php7.1-mbstring php7.1-mysql php7.1-xml php7.1-curl phpunit phpunit-selenium curl > /dev/null 2>&1;
-	sudo apt -y install ${sw_db} ${sw_web} ${sw_php} ${sw_phpmyadmin_must} ${sw_phpmyadmin_improve};
+    sudo apt -y install ${sw_db} ${sw_web} ${sw_php} ${sw_phpmyadmin_must} ${sw_phpmyadmin_improve};
     if [ $? = 0 ] ; then
         echo -e "Software has been installed [\033[;32mFinish\033[;m].";
     else
@@ -172,20 +172,20 @@ env_install()
     echo -e "ThinkPHP5 install.";
     cd $HOME;
 
-	sudo ln -s ${HOME_DIR}/dotfiles/env_config_file/index.php /var/www/html/;
+    sudo ln -s ${HOME_DIR}/dotfiles/env_config_file/index.php /var/www/html/;
 
-	composer create-project topthink/think=5.1 $HOME/tp5  --prefer-dist;
-	sudo ln -s $HOME/tp5/ /var/www/;
+    composer create-project topthink/think=5.1 $HOME/tp5  --prefer-dist;
+    sudo ln -s $HOME/tp5/ /var/www/;
     echo -e "ThinkPHP5 installed.";
 
     echo -e "phpmyadmin install.";
-	composer create-project phpmyadmin/phpmyadmin $HOME/phpmyadmin;
-	sudo ln -s $HOME/phpmyadmin/ /var/www/;
-	cd ${HOME}/phpmyadmin;
-	composer update && cd ${HOME};
+    composer create-project phpmyadmin/phpmyadmin $HOME/phpmyadmin;
+    sudo ln -s $HOME/phpmyadmin/ /var/www/;
+    cd ${HOME}/phpmyadmin;
+    composer update && cd ${HOME};
     echo -e "phpmyadmin installed.";
-	 
-	sudo sh -c ${HOME_DIR}/host_wrtie.sh;
+     
+    sudo sh -c ${HOME_DIR}/host_wrtie.sh;
     exit 0;
 }
 
