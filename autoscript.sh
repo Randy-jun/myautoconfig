@@ -107,11 +107,25 @@ php_config()
     fi
 }
 
+sublime_new_install()
+{
+    echo "new_sublime_install...";
+    wget -qO - https://download.sublimetext.com/sublimehq-pub.gpg | sudo apt-key add - &&
+    sudo apt-get install apt-transport-https &&
+    echo "deb https://download.sublimetext.com/ apt/stable/" | sudo tee /etc/apt/sources.list.d/sublime-text.list;
+    if [ $? = 0 ] ; then
+        return 0;
+    else
+        return 1;
+    fi
+}
+
 main()
 {
+    sublime_new_install;
     #sudo apt update && sudo apt -y full-upgrade;
     #sudo apt -y install htop vim tmux zsh curl synapse > /dev/null 2>&1;
-    sudo apt -y install htop vim zsh curl synapse > /dev/null 2>&1;
+    sudo apt -y install htop vim zsh curl synapse sublime-text > /dev/null 2>&1;
 
     if [ $? = 0 ] ; then
         echo -e "Software has been installed [\033[;32mFinish\033[;m].";
