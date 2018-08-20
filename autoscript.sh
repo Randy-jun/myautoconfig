@@ -123,7 +123,7 @@ sublime_new_install()
 main()
 {
     sublime_new_install;
-    #sudo apt update && sudo apt -y full-upgrade;
+    sudo apt update && sudo apt -y full-upgrade;
     #sudo apt -y install htop vim tmux zsh curl synapse > /dev/null 2>&1;
     sudo apt -y install htop vim zsh curl synapse sublime-text > /dev/null 2>&1;
 
