@@ -124,7 +124,8 @@ nodejs_8_install()
 {
 	echo "Node.js 8 install...";
 	curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash - &&
-	sudo apt -y install nodejs npm
+	sudo apt -y install nodejs &&
+	sudo npm install npm@latest -g --registry=https://registry.npm.taobao.org;
 	if [ $? = 0 ] ; then
         return 0;
     else
