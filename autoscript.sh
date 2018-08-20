@@ -166,7 +166,6 @@ main()
 
 vue_install()
 {
-
     cd ${HOME_DIR};
     git pull;
     nodejs_8_install;
@@ -175,27 +174,29 @@ vue_install()
     else
         echo -e "Nodejs installed [\033[;31mFaile\033[;m].";
         exit 1;
+	fi
     sudo npm install cnpm -g --registry=https://registry.npm.taobao.org;
     if [ $? = 0 ] ; then
         echo -e "cnpm has been installed. [\033[;32mFinish\033[;m].";
     else
         echo -e "cnpm installed [\033[;31mFaile\033[;m].";
         exit 1;
-    sudo cnpm install vue-cli -g;
+    fi
+	sudo cnpm install vue-cli -g;
     if [ $? = 0 ] ; then
         echo -e "Vue-cli has been installed. [\033[;32mFinish\033[;m].";
     else
         echo -e "Vue-cli installed [\033[;31mFaile\033[;m].";
         exit 1;
+	fi
     exit 0;
 }
 
 env_install()
 {
-
     cd ${HOME_DIR};
     git pull;
-    
+
     env_software=(mariadb php nginx);
     #sudo apt update && sudo apt -y full-upgrade;
     sw_db="mariadb-server-10.1 mariadb-client-10.1";
@@ -294,7 +295,7 @@ if [ $# -ge 0 -a $# -le 1 ]; then
         update) echo "$0 start update..." && update;
             exit 0;
             ;;
-        vue_install) echo "$0 start install environment..." && env_install;
+        vue_install) echo "$0 start install environment..." && vue_install;
             exit 0;
             ;;
         env_install) echo "$0 start install environment..." && env_install;
