@@ -120,6 +120,18 @@ sublime_new_install()
     fi
 }
 
+nodejs_8_install()
+{
+	echo "Node.js 8 install...";
+	curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash - &&
+	sudo apt -y install nodejs npm
+	if [ $? = 0 ] ; then
+        return 0;
+    else
+        return 1;
+    fi
+}
+
 main()
 {
     sublime_new_install;
@@ -150,6 +162,32 @@ main()
     done
 
     return 0;
+}
+
+vue_install()
+{
+
+    cd ${HOME_DIR};
+    git pull;
+    nodejs_8_install;
+    if [ $? = 0 ] ; then
+        echo -e "Nodejs has been installed. [\033[;32mFinish\033[;m].";
+    else
+        echo -e "Nodejs installed [\033[;31mFaile\033[;m].";
+        exit 1;
+    sudo npm install cnpm -g --registry=https://registry.npm.taobao.org;
+    if [ $? = 0 ] ; then
+        echo -e "cnpm has been installed. [\033[;32mFinish\033[;m].";
+    else
+        echo -e "cnpm installed [\033[;31mFaile\033[;m].";
+        exit 1;
+    sudo cnpm install vue-cli -g;
+    if [ $? = 0 ] ; then
+        echo -e "Vue-cli has been installed. [\033[;32mFinish\033[;m].";
+    else
+        echo -e "Vue-cli installed [\033[;31mFaile\033[;m].";
+        exit 1;
+    exit 0;
 }
 
 env_install()
@@ -254,6 +292,9 @@ if [ $# -ge 0 -a $# -le 1 ]; then
             exit 0;
             ;;
         update) echo "$0 start update..." && update;
+            exit 0;
+            ;;
+        vue_install) echo "$0 start install environment..." && env_install;
             exit 0;
             ;;
         env_install) echo "$0 start install environment..." && env_install;
