@@ -184,7 +184,8 @@ vue_install()
         echo -e "cnpm installed [\033[;31mFaile\033[;m].";
         exit 1;
     fi
-	sudo cnpm install vue-cli -g;
+	#sudo cnpm install vue-cli -g;#旧版本
+	sudo cnpm install @vue/cli -g;#新版本
     if [ $? = 0 ] ; then
         echo -e "Vue-cli has been installed. [\033[;32mFinish\033[;m].";
     else
