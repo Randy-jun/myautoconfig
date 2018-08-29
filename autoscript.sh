@@ -107,11 +107,38 @@ php_config()
     fi
 }
 
+sublime_new_install()
+{
+    echo "new_sublime_install...";
+    wget -qO - https://download.sublimetext.com/sublimehq-pub.gpg | sudo apt-key add - &&
+    sudo apt-get install apt-transport-https &&
+    echo "deb https://download.sublimetext.com/ apt/stable/" | sudo tee /etc/apt/sources.list.d/sublime-text.list;
+    if [ $? = 0 ] ; then
+        return 0;
+    else
+        return 1;
+    fi
+}
+
+nodejs_8_install()
+{
+	echo "Node.js 8 install...";
+	curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash - &&
+	sudo apt -y install nodejs &&
+	sudo npm install npm@latest -g --registry=https://registry.npm.taobao.org;
+	if [ $? = 0 ] ; then
+        return 0;
+    else
+        return 1;
+    fi
+}
+
 main()
 {
-    #sudo apt update && sudo apt -y full-upgrade;
+    sublime_new_install;
+    sudo apt update && sudo apt -y full-upgrade;
     #sudo apt -y install htop vim tmux zsh curl synapse > /dev/null 2>&1;
-    sudo apt -y install htop vim zsh curl synapse > /dev/null 2>&1;
+    sudo apt -y install htop vim zsh curl synapse sublime-text > /dev/null 2>&1;
 
     if [ $? = 0 ] ; then
         echo -e "Software has been installed [\033[;32mFinish\033[;m].";
@@ -138,12 +165,41 @@ main()
     return 0;
 }
 
-env_install()
+vue_install()
 {
-
     cd ${HOME_DIR};
     git pull;
-    
+    nodejs_8_install;
+    if [ $? = 0 ] ; then
+        echo -e "Nodejs has been installed. [\033[;32mFinish\033[;m].";
+    else
+        echo -e "Nodejs installed [\033[;31mFaile\033[;m].";
+        exit 1;
+	fi
+    sudo npm install cnpm -g --registry=https://registry.npm.taobao.org &&
+	sudo cnpm install cnpm@latest -g;
+    if [ $? = 0 ] ; then
+        echo -e "cnpm has been installed. [\033[;32mFinish\033[;m].";
+    else
+        echo -e "cnpm installed [\033[;31mFaile\033[;m].";
+        exit 1;
+    fi
+	#sudo cnpm install vue-cli -g;#旧版本
+	sudo cnpm install @vue/cli -g;#新版本
+    if [ $? = 0 ] ; then
+        echo -e "Vue-cli has been installed. [\033[;32mFinish\033[;m].";
+    else
+        echo -e "Vue-cli installed [\033[;31mFaile\033[;m].";
+        exit 1;
+	fi
+    exit 0;
+}
+
+env_install()
+{
+    cd ${HOME_DIR};
+    git pull;
+
     env_software=(mariadb php nginx);
     #sudo apt update && sudo apt -y full-upgrade;
     sw_db="mariadb-server-10.1 mariadb-client-10.1";
@@ -240,6 +296,9 @@ if [ $# -ge 0 -a $# -le 1 ]; then
             exit 0;
             ;;
         update) echo "$0 start update..." && update;
+            exit 0;
+            ;;
+        vue_install) echo "$0 start install environment..." && vue_install;
             exit 0;
             ;;
         env_install) echo "$0 start install environment..." && env_install;
