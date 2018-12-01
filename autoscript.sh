@@ -122,7 +122,7 @@ sublime_new_install()
 
 nodejs_8_install()
 {
-	echo "Node.js 8 install...";
+	echo "Node.js 10 install...";
 	curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash - &&
 	sudo apt -y install nodejs &&
 	sudo npm install npm@latest -g --registry=https://registry.npm.taobao.org;
