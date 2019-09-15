@@ -120,10 +120,10 @@ sublime_new_install()
     fi
 }
 
-nodejs_8_install()
+nodejs_12_install()
 {
-	echo "Node.js 10 install...";
-	curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash - &&
+	echo "Node.js 12 install...";
+	curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash -	&&
 	sudo apt -y install nodejs &&
 	sudo npm install npm@latest -g --registry=https://registry.npm.taobao.org;
 	if [ $? = 0 ] ; then
@@ -169,7 +169,7 @@ vue_install()
 {
     cd ${HOME_DIR};
     git pull;
-    nodejs_8_install;
+    nodejs_12_install;
     if [ $? = 0 ] ; then
         echo -e "Nodejs has been installed. [\033[;32mFinish\033[;m].";
     else
