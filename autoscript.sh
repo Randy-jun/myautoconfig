@@ -139,6 +139,8 @@ nodejs_12_install()
 
 main()
 {
+    git submodule update --init --recursive;
+    git fetch;
     sublime_new_install;
     sudo apt update && sudo apt -y full-upgrade;
     sudo apt -y install htop vim tmux zsh curl synapse > /dev/null 2>&1;
