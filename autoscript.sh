@@ -29,8 +29,9 @@ oh_my_zsh_config()
     rm -f ${HOME}/.zshrc &&
     rm -rf ${HOME}/.oh-my-zsh/ &&
     sudo chsh $LOGNAME -s /bin/zsh > /dev/null 2>&1 &&
-    git clone https://github.com/robbyrussell/oh-my-zsh.git ${HOME}/.oh-my-zsh/ > /dev/null 2>&1 &&
+    git clone https://github.com/ohmyzsh/ohmyzsh.git ${HOME}/.oh-my-zsh/ > /dev/null 2>&1 &&
     ln -s ${HOME_DIR}/dotfiles/zshrc ${HOME}/.zshrc > /dev/null 2>&1;
+    # sh -c "$(wget https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh -O -)"
     if [ $? = 0 ] ; then
         return 0;
     else
@@ -138,7 +139,7 @@ main()
     sublime_new_install;
     sudo apt update && sudo apt -y full-upgrade;
     #sudo apt -y install htop vim tmux zsh curl synapse > /dev/null 2>&1;
-    sudo apt -y install htop vim zsh curl synapse sublime-text > /dev/null 2>&1;
+    sudo apt -y install htop vim zsh curl synapse > /dev/null 2>&1;
 
     if [ $? = 0 ] ; then
         echo -e "Software has been installed [\033[;32mFinish\033[;m].";
