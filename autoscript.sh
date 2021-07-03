@@ -6,7 +6,7 @@ tmux_config()
     rm -rf ${HOME}/.tmux.conf &&
     git clone https://github.com/tmux-plugins/tpm ${HOME}/.tmux/plugins/tpm > /dev/null 2>&1 &&
     ln -s -f ${HOME_DIR}/dotfiles/tmux.conf ${HOME}/.tmux.conf > /dev/null 2>&1 &&
-    ln -s -f ${HOME_DIR}/dotfiles/tmux.conf ${HOME}/.tmux.conf > /dev/null 2>&1;
+    cp ${HOME_DIR}/dotfiles/tmux.conf.local ${HOME}/.tmux.conf.local > /dev/null 2>&1;
     if [ $? = 0 ] ; then
         return 0;
     else
