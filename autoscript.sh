@@ -139,7 +139,7 @@ main()
     sublime_new_install;
     sudo apt update && sudo apt -y full-upgrade;
     #sudo apt -y install htop vim tmux zsh curl synapse > /dev/null 2>&1;
-    sudo apt -y install htop vim zsh curl synapse > /dev/null 2>&1;
+    sudo apt -y install htop vim zsh curl synapse sublime_text > /dev/null 2>&1;
 
     if [ $? = 0 ] ; then
         echo -e "Software has been installed [\033[;32mFinish\033[;m].";
