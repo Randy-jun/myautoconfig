@@ -139,7 +139,7 @@ nodejs_12_install()
 
 main()
 {
-    git submodule update --init --recursive > /dev/null 2>$1;
+    git submodule update --init --recursive > /dev/null 2>&1;
 	if [ $? = 0 ] ; then
         echo -e "Submodule has been copied [\033[;32mFinish\033[;m].";
     else
