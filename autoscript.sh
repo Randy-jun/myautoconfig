@@ -140,6 +140,12 @@ nodejs_12_install()
 main()
 {
     git submodule update --init --recursive;
+	if [ $? = 0 ] ; then
+        echo -e "Submodule has been copied [\033[;32mFinish\033[;m].";
+    else
+        echo -e "Software has been copied [\033[;31mFaile\033[;m].";
+        exit 1;
+    fi
     git fetch;
     sublime_new_install;
     sudo apt update && sudo apt -y full-upgrade;
