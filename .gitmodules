@@ -4,3 +4,6 @@
 [submodule "dotfiles/.tmux"]
 	path = dotfiles/.tmux
 	url = https://github.com/gpakosz/.tmux.git
+[submodule "dotfiles/vimrc"]
+	path = dotfiles/vimrc
+	url = https://github.com/amix/vimrc.git
