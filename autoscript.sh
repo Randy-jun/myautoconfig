@@ -5,7 +5,8 @@ tmux_config()
     rm -f ${HOME}/.tmux.conf &&
     rm -rf ${HOME}/.tmux.conf &&
     git clone https://github.com/tmux-plugins/tpm ${HOME}/.tmux/plugins/tpm > /dev/null 2>&1 &&
-    ln -s ${HOME_DIR}/dotfiles/tmux.conf ${HOME}/.tmux.conf > /dev/null 2>&1;
+    ln -s -f ${HOME_DIR}/dotfiles/tmux.conf ${HOME}/.tmux.conf > /dev/null 2>&1 &&
+    ln -s -f ${HOME_DIR}/dotfiles/tmux.conf ${HOME}/.tmux.conf > /dev/null 2>&1;
     if [ $? = 0 ] ; then
         return 0;
     else
@@ -16,7 +17,7 @@ tmux_config()
 vim_config()
 {
     rm -f ${HOME}/.vimrc &&
-    ln -s ${HOME_DIR}/dotfiles/vimrc ${HOME}/.vimrc > /dev/null 2>&1;
+    ln -s -f ${HOME_DIR}/dotfiles/vimrc ${HOME}/.vimrc > /dev/null 2>&1;
     if [ $? = 0 ] ; then
         return 0;
     else
@@ -30,7 +31,7 @@ oh_my_zsh_config()
     rm -rf ${HOME}/.oh-my-zsh/ &&
     sudo chsh $LOGNAME -s /bin/zsh > /dev/null 2>&1 &&
     git clone https://github.com/ohmyzsh/ohmyzsh.git ${HOME}/.oh-my-zsh/ > /dev/null 2>&1 &&
-    ln -s ${HOME_DIR}/dotfiles/zshrc ${HOME}/.zshrc > /dev/null 2>&1;
+    ln -s -f ${HOME_DIR}/dotfiles/zshrc ${HOME}/.zshrc > /dev/null 2>&1;
     # sh -c "$(wget https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh -O -)"
     if [ $? = 0 ] ; then
         return 0;
@@ -42,7 +43,7 @@ oh_my_zsh_config()
 pip_config()
 {
     sudo rm -f /etc/pip.conf &&
-    sudo ln -s ${HOME_DIR}/dotfiles/pip.conf /etc/pip.conf > /dev/null 2>&1;
+    sudo ln -s -f ${HOME_DIR}/dotfiles/pip.conf /etc/pip.conf > /dev/null 2>&1;
     if [ $? = 0 ] ; then
         return 0;
     else
@@ -74,7 +75,7 @@ nginx_config()
     sudo rm -f /etc/nginx/sites-available/default;
     sudo systemctl stop nginx.service;
     echo "systemctl enable nginx_config...";
-    sudo ln ${HOME_DIR}/dotfiles/env_config_file/default  /etc/nginx/sites-available/default;
+    sudo ln -s -f ${HOME_DIR}/dotfiles/env_config_file/default  /etc/nginx/sites-available/default;
     sudo systemctl enable nginx.service && sudo systemctl restart nginx.service || sudo systemctl start nginx.service;
     echo "systemctl enable nginx_config...";
     if [ $? = 0 ] ; then
@@ -96,8 +97,8 @@ php_config()
     # composer self-update;
     sudo rm -f /etc/php/7.1/fpm/php.ini;
     sudo rm -f /etc/php/7.1/cli/php.ini;
-    sudo ln ${HOME_DIR}/dotfiles/env_config_file/php.ini /etc/php/7.1/fpm/php.ini;
-    sudo ln ${HOME_DIR}/dotfiles/env_config_file/php.ini /etc/php/7.1/cli/php.ini;
+    sudo ln -s -f ${HOME_DIR}/dotfiles/env_config_file/php.ini /etc/php/7.1/fpm/php.ini;
+    sudo ln -s -f ${HOME_DIR}/dotfiles/env_config_file/php.ini /etc/php/7.1/cli/php.ini;
     echo "systemctl enable php7.1-fpm_config...";
     sudo systemctl enable php7.1-fpm.service && sudo systemctl restart php7.1-fpm.service || sudo systemctl start php7.1-fpm.service;
     echo "systemctl enable php7.1-fpm_config...";
@@ -138,8 +139,8 @@ main()
 {
     sublime_new_install;
     sudo apt update && sudo apt -y full-upgrade;
-    #sudo apt -y install htop vim tmux zsh curl synapse > /dev/null 2>&1;
-    sudo apt -y install htop vim zsh curl synapse sublime-text > /dev/null 2>&1;
+    sudo apt -y install htop vim tmux zsh curl synapse > /dev/null 2>&1;
+    # sudo apt -y install htop vim zsh curl synapse sublime-text > /dev/null 2>&1;
 
     if [ $? = 0 ] ; then
         echo -e "Software has been installed [\033[;32mFinish\033[;m].";
@@ -229,7 +230,7 @@ env_install()
     echo -e "ThinkPHP5 install.";
     cd $HOME;
 
-    sudo ln -s ${HOME_DIR}/dotfiles/env_config_file/index.php /var/www/html/;
+    sudo ln -s -f ${HOME_DIR}/dotfiles/env_config_file/index.php /var/www/html/;
 
     composer create-project topthink/think=5.1 $HOME/tp5  --prefer-dist;
     sudo ln -s $HOME/tp5/ /var/www/;
@@ -237,7 +238,7 @@ env_install()
 
     echo -e "phpmyadmin install.";
     composer create-project phpmyadmin/phpmyadmin $HOME/phpmyadmin;
-    sudo ln -s $HOME/phpmyadmin/ /var/www/;
+    sudo ln -s -f $HOME/phpmyadmin/ /var/www/;
     cd ${HOME}/phpmyadmin;
     composer update && cd ${HOME};
     echo -e "phpmyadmin installed.";
