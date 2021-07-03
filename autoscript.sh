@@ -4,9 +4,9 @@ tmux_config()
 {
     rm -f ${HOME}/.tmux.conf &&
     rm -rf ${HOME}/.tmux.conf &&
-    git clone https://github.com/tmux-plugins/tpm ${HOME}/.tmux/plugins/tpm > /dev/null 2>&1;# &&
-    ln -s -f ${HOME_DIR}/dotfiles/tmux.conf ${HOME}/.tmux.conf > /dev/null 2>&1 &&
-    # cp ${HOME_DIR}/dotfiles/tmux.conf.local ${HOME}/.tmux.conf.local > /dev/null 2>&1;
+    # git clone https://github.com/tmux-plugins/tpm ${HOME}/.tmux/plugins/tpm > /dev/null 2>&1 &&
+    ln -s -f ${HOME_DIR}/dotfiles/.tmux/tmux.conf ${HOME}/.tmux.conf > /dev/null 2>&1 &&
+    cp ${HOME_DIR}/dotfiles/.tmux/tmux.conf.local ${HOME}/.tmux.conf.local > /dev/null 2>&1;
     if [ $? = 0 ] ; then
         return 0;
     else
@@ -18,8 +18,8 @@ vim_config()
 {
     rm -f ${HOME}/.vimrc &&
     # ln -s -f ${HOME_DIR}/dotfiles/vimrc ${HOME}/.vimrc > /dev/null 2>&1;
-    git clone https://github.com/amix/vimrc.git ${HOME}/.vim_runtime &&
-    sh ${HOME}/.vim_runtime/install_awesome_vimrc.sh > /dev/null 2>&1;
+    # git clone https://github.com/amix/vimrc.git ${HOME}/.vim_runtime &&
+    sh -c ${HOME_DIR}/dotfiles/vimrc/install_awesome_vimrc.sh > /dev/null 2>&1;
     if [ $? = 0 ] ; then
         return 0;
     else
@@ -32,9 +32,9 @@ oh_my_zsh_config()
     rm -f ${HOME}/.zshrc &&
     rm -rf ${HOME}/.oh-my-zsh/ &&
     sudo chsh $LOGNAME -s /bin/zsh > /dev/null 2>&1 &&
-    git clone https://github.com/ohmyzsh/ohmyzsh.git ${HOME}/.oh-my-zsh/ > /dev/null 2>&1 &&
-    ln -s -f ${HOME_DIR}/dotfiles/zshrc ${HOME}/.zshrc > /dev/null 2>&1;
-    # sh -c "$(wget https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh -O -)"
+    # git clone https://github.com/ohmyzsh/ohmyzsh.git ${HOME}/.oh-my-zsh/ > /dev/null 2>&1 &&
+    # ln -s -f ${HOME_DIR}/dotfiles/zshrc ${HOME}/.zshrc > /dev/null 2>&1;
+    sh -c ${HOME_DIR}/dotfiles/ohmyzsh/tools/install.sh > /dev/null 2>&1;
     if [ $? = 0 ] ; then
         return 0;
     else
@@ -153,7 +153,7 @@ main()
 
     software=(tmux vim oh_my_zsh pip);
     # software=(vim oh_my_zsh pip);
-
+    
     for sw in ${software[*]};
     do
         ${sw}'_config';
@@ -244,7 +244,7 @@ env_install()
     cd ${HOME}/phpmyadmin;
     composer update && cd ${HOME};
     echo -e "phpmyadmin installed.";
-
+     
     sudo sh -c ${HOME_DIR}/host_wrtie.sh;
     exit 0;
 }
