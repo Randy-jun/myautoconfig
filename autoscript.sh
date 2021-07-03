@@ -275,7 +275,10 @@ env_update()
 update()
 {
     cd ${HOME_DIR};
-    git pull;
+    git pull --rebase;
+    cd ${HOME};
+    git pull --rebase;
+    python update_plugins.py;
     if [ $? = 0 ] ; then
         echo -e "$0 updated [\033[;32mFinish\033[;m].";
         return 0;
