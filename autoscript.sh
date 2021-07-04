@@ -19,6 +19,7 @@ vim_config()
     rm -f ${HOME}/.vimrc &&
     # ln -s -f ${HOME_DIR}/dotfiles/vimrc ${HOME}/.vimrc > /dev/null 2>&1;
     # git clone https://github.com/amix/vimrc.git ${HOME}/.vim_runtime &&
+    ln -s -f ${HOME_DIR}/dotfiles/vimrc ${HOME}/.vim_runtime > dev/null 2>&1 &&
     sh -c ${HOME_DIR}/dotfiles/vimrc/install_awesome_vimrc.sh > /dev/null 2>&1;
     if [ $? = 0 ] ; then
         return 0;
