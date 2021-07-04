@@ -35,7 +35,8 @@ oh_my_zsh_config()
     sudo chsh $LOGNAME -s /bin/zsh > /dev/null 2>&1 &&
     # git clone https://github.com/ohmyzsh/ohmyzsh.git ${HOME}/.oh-my-zsh/ > /dev/null 2>&1 &&
     # ln -s -f ${HOME_DIR}/dotfiles/zshrc ${HOME}/.zshrc > /dev/null 2>&1;
-    sh -c ${HOME_DIR}/dotfiles/ohmyzsh/tools/install.sh > /dev/null 2>&1;
+    # sh -c ${HOME_DIR}/dotfiles/ohmyzsh/tools/install.sh > /dev/null 2>&1;
+    sh -c ${HOME_DIR}/dotfiles/ohmyzsh/tools/install.sh;
     if [ $? = 0 ] ; then
         return 0;
     else
