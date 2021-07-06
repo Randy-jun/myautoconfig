@@ -36,7 +36,7 @@ oh_my_zsh_config()
     # git clone https://github.com/ohmyzsh/ohmyzsh.git ${HOME}/.oh-my-zsh/ > /dev/null 2>&1 &&
     # ln -s -f ${HOME_DIR}/dotfiles/zshrc ${HOME}/.zshrc > /dev/null 2>&1;
     # sh -c ${HOME_DIR}/dotfiles/ohmyzsh/tools/install.sh > /dev/null 2>&1;
-    sh -c ${HOME_DIR}/dotfiles/ohmyzsh/tools/install.sh;
+    sh -c ${HOME_DIR}/dotfiles/ohmyzsh/tools/install.sh > /dev/null 2>&1;
     if [ $? = 0 ] ; then
         return 0;
     else
