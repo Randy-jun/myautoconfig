@@ -32,11 +32,11 @@ oh_my_zsh_config()
 {
     rm -f ${HOME}/.zshrc &&
     rm -rf ${HOME}/.oh-my-zsh/ &&
-    sudo chsh $LOGNAME -s /bin/zsh > /dev/null 2>&1 &&
+    # sudo chsh $LOGNAME -s /bin/zsh > /dev/null 2>&1 &&
     # git clone https://github.com/ohmyzsh/ohmyzsh.git ${HOME}/.oh-my-zsh/ > /dev/null 2>&1 &&
     # ln -s -f ${HOME_DIR}/dotfiles/zshrc ${HOME}/.zshrc > /dev/null 2>&1;
     # sh -c ${HOME_DIR}/dotfiles/ohmyzsh/tools/install.sh > /dev/null 2>&1;
-    sh -c ${HOME_DIR}/dotfiles/ohmyzsh/tools/install.sh > /dev/null 2>&1;
+    (${HOME_DIR}/dotfiles/ohmyzsh/tools/install.sh --unattended);
     if [ $? = 0 ] ; then
         return 0;
     else
