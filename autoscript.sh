@@ -36,12 +36,8 @@ oh_my_zsh_config()
     # git clone https://github.com/ohmyzsh/ohmyzsh.git ${HOME}/.oh-my-zsh/ > /dev/null 2>&1 &&
     # ln -s -f ${HOME_DIR}/dotfiles/zshrc ${HOME}/.zshrc > /dev/null 2>&1;
     # sh -c ${HOME_DIR}/dotfiles/ohmyzsh/tools/install.sh > /dev/null 2>&1;
-<<<<<<< HEAD
-    sh -c ${HOME_DIR}/dotfiles/ohmyzsh/tools/install.sh  > /dev/null 2>&1 &&
+    (${HOME_DIR}/dotfiles/ohmyzsh/tools/install.sh --unattended)  > /dev/null 2>&1 &&
     sudo chsh $LOGNAME -s /bin/zsh > /dev/null 2>&1;
-=======
-    (${HOME_DIR}/dotfiles/ohmyzsh/tools/install.sh --unattended);
->>>>>>> 383048f6acda1b0e16f0fb559018620f1cda92b9
     if [ $? = 0 ] ; then
         return 0;
     else
