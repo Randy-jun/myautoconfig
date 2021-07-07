@@ -20,7 +20,8 @@ vim_config()
     # ln -s -f ${HOME_DIR}/dotfiles/vimrc ${HOME}/.vimrc > /dev/null 2>&1;
     # git clone https://github.com/amix/vimrc.git ${HOME}/.vim_runtime &&
     ln -s -f ${HOME_DIR}/dotfiles/vimrc ${HOME}/.vim_runtime > /dev/null 2>&1 &&
-    sh -c ${HOME_DIR}/dotfiles/vimrc/install_awesome_vimrc.sh > /dev/null 2>&1;
+    sh -c ${HOME_DIR}/dotfiles/vimrc/install_awesome_vimrc.sh > /dev/null 2>&1 &&
+    sed -i "2iset nu" {HOME}/.vimrc;
     if [ $? = 0 ] ; then
         return 0;
     else
@@ -36,7 +37,8 @@ oh_my_zsh_config()
     # git clone https://github.com/ohmyzsh/ohmyzsh.git ${HOME}/.oh-my-zsh/ > /dev/null 2>&1 &&
     # ln -s -f ${HOME_DIR}/dotfiles/zshrc ${HOME}/.zshrc > /dev/null 2>&1;
     # sh -c ${HOME_DIR}/dotfiles/ohmyzsh/tools/install.sh > /dev/null 2>&1;
-    (${HOME_DIR}/dotfiles/ohmyzsh/tools/install.sh --unattended)  > /dev/null 2>&1 &&
+    # (${HOME_DIR}/dotfiles/ohmyzsh/tools/install.sh --unattended) > /dev/null 2>&1 &&
+    (${HOME_DIR}/dotfiles/ohmyzsh/tools/install.sh --unattended) &&
     sudo chsh $LOGNAME -s /bin/zsh > /dev/null 2>&1;
     if [ $? = 0 ] ; then
         return 0;
@@ -164,7 +166,7 @@ main()
 
     software=(tmux vim oh_my_zsh pip);
     # software=(vim oh_my_zsh pip);
-    
+
     for sw in ${software[*]};
     do
         ${sw}'_config';
@@ -255,7 +257,7 @@ env_install()
     cd ${HOME}/phpmyadmin;
     composer update && cd ${HOME};
     echo -e "phpmyadmin installed.";
-     
+
     sudo sh -c ${HOME_DIR}/host_wrtie.sh;
     exit 0;
 }
