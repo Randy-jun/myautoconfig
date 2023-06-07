@@ -144,17 +144,17 @@ nodejs_12_install()
 
 main()
 {
-    git submodule update --init --recursive > /dev/null 2>&1;
+    sudo git submodule update --init --recursive > /dev/null 2>&1;
 	if [ $? = 0 ] ; then
         echo -e "Submodule has been copied [\033[;32mFinish\033[;m].";
     else
         echo -e "Software has been copied [\033[;31mFaile\033[;m].";
         exit 1;
     fi
-    git fetch;
-    sublime_new_install;
+    # git fetch;
+    # sublime_new_install;
     sudo apt update && sudo apt -y full-upgrade;
-    sudo apt -y install htop vim tmux zsh curl synapse > /dev/null 2>&1;
+    sudo apt -y install htop vim tmux zsh curl > /dev/null 2>&1;
     # sudo apt -y install htop vim zsh curl synapse sublime-text > /dev/null 2>&1;
 
     if [ $? = 0 ] ; then
@@ -291,7 +291,7 @@ update()
     git pull --rebase;
     cd ${HOME};
     git pull --rebase;
-    python update_plugins.py;
+    # python update_plugins.py;
     if [ $? = 0 ] ; then
         echo -e "$0 updated [\033[;32mFinish\033[;m].";
         return 0;
