@@ -151,6 +151,13 @@ main()
         echo -e "Software has been copied [\033[;31mFaile\033[;m].";
         exit 1;
     fi
+    sudo git submodule update --remote > /dev/null 2>&1;
+	if [ $? = 0 ] ; then
+        echo -e "Submodule has been updated [\033[;32mFinish\033[;m].";
+    else
+        echo -e "Software has been updated [\033[;31mFaile\033[;m].";
+        exit 1;
+    fi
     # git fetch;
     # sublime_new_install;
     sudo apt update && sudo apt -y full-upgrade;
@@ -289,9 +296,10 @@ update()
 {
     cd ${HOME_DIR};
     git pull --rebase;
-    cd ${HOME};
-    git pull --rebase;
+    # cd ${HOME};
+    # git pull --rebase;
     # python update_plugins.py;
+    sudo git submodule update --remote > /dev/null 2>&1;
     if [ $? = 0 ] ; then
         echo -e "$0 updated [\033[;32mFinish\033[;m].";
         return 0;
