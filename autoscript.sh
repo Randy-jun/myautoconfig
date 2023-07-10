@@ -142,54 +142,6 @@ nodejs_18_install()
     fi
 }
 
-main()
-{
-    # sudo git submodule update  --recursive > /dev/null 2>&1;
-    sudo git submodule update  --init > /dev/null 2>&1;
-	if [ $? = 0 ] ; then
-        echo -e "Submodule has been copied [\033[;32mFinish\033[;m].";
-    else
-        echo -e "Software has been copied [\033[;31mFaile\033[;m].";
-        exit 1;
-    fi
-    sudo git submodule update --remote > /dev/null 2>&1;
-	if [ $? = 0 ] ; then
-        echo -e "Submodule has been updated [\033[;32mFinish\033[;m].";
-    else
-        echo -e "Software has been updated [\033[;31mFaile\033[;m].";
-        exit 1;
-    fi
-    # git fetch;
-    # sublime_new_install;
-    sudo apt update && sudo apt -y full-upgrade;
-    sudo apt -y install htop vim tmux zsh curl > /dev/null 2>&1;
-    # sudo apt -y install htop vim zsh curl synapse sublime-text > /dev/null 2>&1;
-
-    if [ $? = 0 ] ; then
-        echo -e "Software has been installed [\033[;32mFinish\033[;m].";
-    else
-        echo -e "Software has been installed [\033[;31mFaile\033[;m].";
-        exit 1;
-    fi
-
-    software=(tmux vim oh_my_zsh pip);
-    # software=(vim oh_my_zsh pip);
-
-    for sw in ${software[*]};
-    do
-        ${sw}'_config';
-        if [ $? = 0 ] ; then
-            echo -e "$0 deployed ${sw} [\033[;32mFinish\033[;m].";
-            continue;
-        else
-            echo -e "$0 deployed ${sw} [\033[;31mFaile\033[;m].";
-            return 1;
-        fi
-    done
-
-    return 0;
-}
-
 vue_install()
 {
     cd ${HOME_DIR};
@@ -308,6 +260,54 @@ update()
         echo -e "$0 updated [\033[;31mFaile\033[;m].";
         return 1;
     fi
+}
+
+main()
+{
+    # sudo git submodule update  --recursive > /dev/null 2>&1;
+    sudo git submodule update  --init > /dev/null 2>&1;
+	if [ $? = 0 ] ; then
+        echo -e "Submodule has been copied [\033[;32mFinish\033[;m].";
+    else
+        echo -e "Software has been copied [\033[;31mFaile\033[;m].";
+        exit 1;
+    fi
+    sudo git submodule update --remote > /dev/null 2>&1;
+	if [ $? = 0 ] ; then
+        echo -e "Submodule has been updated [\033[;32mFinish\033[;m].";
+    else
+        echo -e "Software has been updated [\033[;31mFaile\033[;m].";
+        exit 1;
+    fi
+    # git fetch;
+    # sublime_new_install;
+    sudo apt update && sudo apt -y full-upgrade;
+    sudo apt -y install htop vim tmux zsh curl > /dev/null 2>&1;
+    # sudo apt -y install htop vim zsh curl synapse sublime-text > /dev/null 2>&1;
+
+    if [ $? = 0 ] ; then
+        echo -e "Software has been installed [\033[;32mFinish\033[;m].";
+    else
+        echo -e "Software has been installed [\033[;31mFaile\033[;m].";
+        exit 1;
+    fi
+
+    software=(tmux vim oh_my_zsh pip);
+    # software=(vim oh_my_zsh pip);
+
+    for sw in ${software[*]};
+    do
+        ${sw}'_config';
+        if [ $? = 0 ] ; then
+            echo -e "$0 deployed ${sw} [\033[;32mFinish\033[;m].";
+            continue;
+        else
+            echo -e "$0 deployed ${sw} [\033[;31mFaile\033[;m].";
+            return 1;
+        fi
+    done
+
+    return 0;
 }
 
 DATE=$(date);
