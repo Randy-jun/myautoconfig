@@ -132,9 +132,9 @@ sublime_new_install()
 nodejs_current_install()
 {
 	echo "Node.js current install...";
-	curl -fsSL https://deb.nodesource.com/setup_current.x | sudo -E bash - &&
+	# curl -fsSL https://deb.nodesource.com/setup_current.x | sudo -E bash - &&
 	sudo apt install -y nodejs &&
-	sudo npm install -g cnpm --registry=https://registry.npmmirror.com
+	sudo npm install -g cnpm --registry=https://registry.npmmirror.com;
 	if [ $? = 0 ] ; then
         return 0;
     else
