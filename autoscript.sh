@@ -273,7 +273,8 @@ main()
         echo -e "Software has been copied [\033[;31mFaile\033[;m].";
         exit 1;
     fi
-    sudo git submodule update --remote > /dev/null 2>&1;
+    # sudo git submodule update --remote > /dev/null 2>&1;
+    sudo git submodule update --remote;
 	if [ $? = 0 ] ; then
         echo -e "Submodule has been updated [\033[;32mFinish\033[;m].";
     else
