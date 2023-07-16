@@ -129,11 +129,11 @@ sublime_new_install()
     fi
 }
 
-nodejs_18_install()
+nodejs_20_install()
 {
-	echo "Node.js 18 install...";
-	curl -sL https://deb.nodesource.com/setup_18.x | sudo -E bash -	&&
-	sudo apt -y install nodejs &&
+	echo "Node.js 20 install...";
+	curl -fsSL https://deb.nodesource.com/setup_20.x | sudo -E bash - &&
+	sudo apt install -y nodejs &&
 	sudo npm install npm@latest -g --registry=https://registry.npm.taobao.org;
 	if [ $? = 0 ] ; then
         return 0;
@@ -146,7 +146,7 @@ vue_install()
 {
     cd ${HOME_DIR};
     git pull;
-    nodejs_18_install;
+    nodejs_20_install;
     if [ $? = 0 ] ; then
         echo -e "Nodejs has been installed. [\033[;32mFinish\033[;m].";
     else
