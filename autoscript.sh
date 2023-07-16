@@ -252,7 +252,7 @@ update()
     # cd ${HOME};
     # git pull --rebase;
     # python update_plugins.py;
-    sudo git submodule update --remote > /dev/null 2>&1;
+    sudo git submodule update --remote;
     if [ $? = 0 ] ; then
         echo -e "$0 updated [\033[;32mFinish\033[;m].";
         return 0;
