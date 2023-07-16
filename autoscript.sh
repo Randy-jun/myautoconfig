@@ -153,7 +153,7 @@ vue_install()
         echo -e "Nodejs installed [\033[;31mFaile\033[;m].";
         exit 1;
 	fi
-    sudo npm install cnpm -g --registry=https://registry.npm.taobao.org &&
+    sudo npm install -g cnpm --registry=https://registry.npmmirror.com; &&
 	sudo cnpm install cnpm@latest -g;
     if [ $? = 0 ] ; then
         echo -e "cnpm has been installed. [\033[;32mFinish\033[;m].";
