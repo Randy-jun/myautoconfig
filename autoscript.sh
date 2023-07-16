@@ -266,7 +266,7 @@ main()
 {
     # sudo git submodule update  --recursive > /dev/null 2>&1;
     # sudo git submodule update  --init > /dev/null 2>&1;
-    sudo git submodule update  --init;
+    sudo git submodule update --init;
 	if [ $? = 0 ] ; then
         echo -e "Submodule has been copied [\033[;32mFinish\033[;m].";
     else
