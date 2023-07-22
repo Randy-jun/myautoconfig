@@ -132,7 +132,15 @@ sublime_new_install()
 nodejs_current_install()
 {
 	echo "Node.js current install...";
-	curl -sL https://deb.nodesource.com/setup_current.x | sudo -E bash - &&
+	sudo apt-get purge nodejs && sudo rm -r /etc/apt/sources.list.d/nodesource.list;
+	if [ $? = 0 ] ; then
+	echo "Node.js current reinstall...";
+        return 0;
+    else
+    	echo "Node.js reinstall...";
+        return 1;
+    fi
+	curl -fsSL https://deb.nodesource.com/setup_current.x | sudo -E bash - &&
 	sudo apt install -y nodejs;
 	sudo npm install -g cnpm --registry=https://registry.npmmirror.com;
 	if [ $? = 0 ] ; then
@@ -283,7 +291,7 @@ main()
     fi
     # git fetch;
     # sublime_new_install;
-    sudo apt update && sudo apt -y full-upgrade;
+    sudo apt update && sudo apt -y ca-certificates gnupg && sudo apt -y full-upgrade;
     sudo apt -y install htop vim tmux zsh curl > /dev/null 2>&1;
     # sudo apt -y install htop vim zsh curl synapse sublime-text > /dev/null 2>&1;
 
