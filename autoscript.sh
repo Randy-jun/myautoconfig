@@ -2,10 +2,10 @@
 
 tmux_config()
 {
-    rm -f ${HOME}/.tmux.conf &&
-    rm -f ${HOME}/.tmux.conf.local &&
-    git clone https://github.com/tmux-plugins/tpm ${HOME}/.tmux/plugins/tpm > /dev/null 2>&1 &&
-    ln -s -f ${HOME_DIR}/dotfiles/.tmux/.tmux.conf ${HOME}/.tmux.conf > /dev/null 2>&1 &&
+    rm -f ${HOME}/.tmux.conf;
+    rm -f ${HOME}/.tmux.conf.local;
+    git clone https://github.com/tmux-plugins/tpm ${HOME}/.tmux/plugins/tpm > /dev/null 2>&1;
+    ln -s -f ${HOME_DIR}/dotfiles/.tmux/.tmux.conf ${HOME}/.tmux.conf > /dev/null 2>&1 && 
     cp ${HOME_DIR}/dotfiles/.tmux/.tmux.conf.local ${HOME}/.tmux.conf.local > /dev/null 2>&1;
     if [ $? = 0 ] ; then
         return 0;
@@ -16,7 +16,7 @@ tmux_config()
 
 vim_config()
 {
-    rm -f ${HOME}/.vimrc &&
+    rm -f ${HOME}/.vimrc;
     # ln -s -f ${HOME_DIR}/dotfiles/vimrc ${HOME}/.vimrc > /dev/null 2>&1;
     # git clone https://github.com/amix/vimrc.git ${HOME}/.vim_runtime &&
     ln -s -f ${HOME_DIR}/dotfiles/vimrc ${HOME}/.vim_runtime > /dev/null 2>&1 &&
@@ -31,8 +31,8 @@ vim_config()
 
 oh_my_zsh_config()
 {
-    rm -f ${HOME}/.zshrc &&
-    rm -rf ${HOME}/.oh-my-zsh/ &&
+    rm -f ${HOME}/.zshrc;
+    rm -rf ${HOME}/.oh-my-zsh/;
     # sudo chsh $LOGNAME -s /bin/zsh > /dev/null 2>&1 &&
     # git clone https://github.com/ohmyzsh/ohmyzsh.git ${HOME}/.oh-my-zsh/ > /dev/null 2>&1 &&
     # ln -s -f ${HOME_DIR}/dotfiles/zshrc ${HOME}/.zshrc > /dev/null 2>&1;
@@ -49,7 +49,7 @@ oh_my_zsh_config()
 
 pip_config()
 {
-    sudo rm -f /etc/pip.conf &&
+    sudo rm -f /etc/pip.conf;
     sudo ln -s -f ${HOME_DIR}/dotfiles/pip.conf /etc/pip.conf > /dev/null 2>&1;
     if [ $? = 0 ] ; then
         return 0;
