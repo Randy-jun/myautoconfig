@@ -131,19 +131,18 @@ sublime_new_install()
 
 nodejs_current_install()
 {
-	echo "Node.js current install...";
-	sudo apt-get purge nodejs && sudo rm -r /etc/apt/sources.list.d/nodesource.list;
-	if [ $? = 0 ] ; then
-	echo "Node.js current reinstall...";
-        return 0;
+    echo "Node.js current install...";
+    for pkg in nodejs; do sudo apt purge nodejs $pkg && sudo rm -r /etc/apt/sources.list.d/nodesource.list; done
+    if [ $? = 0 ] ; then
+    echo "Node.js current reinstall...";
     else
-    	echo "Node.js reinstall...";
-        return 1;
+        echo "Node.js reinstall...";
     fi
-	curl -fsSL https://deb.nodesource.com/setup_current.x | sudo -E bash - &&
-	sudo apt install -y nodejs;
-	sudo npm install -g cnpm --registry=https://registry.npmmirror.com;
-	if [ $? = 0 ] ; then
+    # curl -fsSL https://deb.nodesource.com/setup_current.x | sudo -E bash - &&
+    curl -sL https://deb.nodesource.com/setup_current.x | sudo -E bash - &&
+    sudo apt install -y nodejs;
+    sudo npm install -g cnpm --registry=https://registry.npmmirror.com;
+    if [ $? = 0 ] ; then
         return 0;
     else
         return 1;
@@ -160,24 +159,42 @@ vue_install()
     else
         echo -e "Nodejs installed [\033[;31mFaile\033[;m].";
         exit 1;
-	fi
+    fi
     # sudo npm install -g cnpm --registry=https://registry.npmmirror.com &&
-	sudo cnpm install cnpm@latest -g;
+    sudo cnpm install cnpm@latest -g;
     if [ $? = 0 ] ; then
         echo -e "cnpm has been installed. [\033[;32mFinish\033[;m].";
     else
         echo -e "cnpm installed [\033[;31mFaile\033[;m].";
         exit 1;
     fi
-	#sudo cnpm install vue-cli -g;#旧版本
-	sudo cnpm install @vue/cli -g;#新版本
+    #sudo cnpm install vue-cli -g;#旧版本
+    sudo cnpm install @vue/cli -g;#新版本
     if [ $? = 0 ] ; then
         echo -e "Vue-cli has been installed. [\033[;32mFinish\033[;m].";
     else
         echo -e "Vue-cli installed [\033[;31mFaile\033[;m].";
         exit 1;
-	fi
+    fi
     exit 0;
+}
+
+docker_install()
+{
+    echo "Docker current install...";
+    # for pkg in docker.io docker-doc docker-compose podman-docker containerd runc; do sudo apt remove $pkg; done
+    sudo apt autoremove docker.io docker-doc docker-compose podman-docker containerd runc;
+    sudo apt -y install ca-certificates curl gnupg;
+    sudo install -m 0755 -d /etc/apt/keyrings;
+    curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg;
+    echo "deb [arch="$(dpkg --print-architecture)" signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu   "$(. /etc/os-release && echo "$VERSION_CODENAME")" stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null;
+    sudo apt update && sudo apt install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin;
+    sudo docker run hello-world;
+    if [ $? = 0 ] ; then
+        return 0;
+    else
+        return 1;
+    fi
 }
 
 env_install()
@@ -275,7 +292,7 @@ main()
     # sudo git submodule update  --recursive > /dev/null 2>&1;
     # sudo git submodule update  --init > /dev/null 2>&1;
     sudo git submodule update --init;
-	if [ $? = 0 ] ; then
+    if [ $? = 0 ] ; then
         echo -e "Submodule has been copied [\033[;32mFinish\033[;m].";
     else
         echo -e "Software has been copied [\033[;31mFaile\033[;m].";
@@ -283,7 +300,7 @@ main()
     fi
     # sudo git submodule update --remote > /dev/null 2>&1;
     sudo git submodule update --remote;
-	if [ $? = 0 ] ; then
+    if [ $? = 0 ] ; then
         echo -e "Submodule has been updated [\033[;32mFinish\033[;m].";
     else
         echo -e "Software has been updated [\033[;31mFaile\033[;m].";
@@ -339,6 +356,9 @@ if [ $# -ge 0 -a $# -le 1 ]; then
             exit 0;
             ;;
         vue_install) echo "$0 start install environment..." && vue_install;
+            exit 0;
+            ;;
+        docker_install) echo "$0 start install Docker..." && docker_install;
             exit 0;
             ;;
         env_install) echo "$0 start install environment..." && env_install;
