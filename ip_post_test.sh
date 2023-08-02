@@ -1,14 +1,27 @@
 #! /bin/bash
 
-ipv6_get(){
-    ip -6 addr | grep "inet6 24" | awk -F " " '{ print $2 }' | awk -F"/" '{ print $1 }'
-}
 
-ipv6_net_get(){
-    curl -s 6.ipw.cn
-}
+# ipv6_get(){
+#     ip = ip -6 addr | grep "inet6 24" | awk -F " " '{ print $2 }' | awk -F"/" '{ print $1 }'
+#     echo $ip
+# }
 
-net_get(){
-    curl -s test.ipw.cn
-}
-echo "$(date)    $(ipv6_get)  ( $(ipv6_net_get) == $(net_get) )" | mail -s "Ubuntu yroot IPv6" 13669220555@139.com
+#IP_HOLD = /tmp/ip_hold
+#IP_LOG = /var/log/ip.log
+
+netcheck=$(curl -m 5 -s test.ipw.cn);
+# echo $netcheck
+if [ 0 = $? ]; then
+    localipv6=$(curl -m 5 -s 6.ipw.cn);
+    if [ 0 = $? ]; then
+        if [ $localipv6 = $netcheck ]; then
+            echo "$(date) Network connected, IPv6:$localipv6" | mail -s "Ubuntu yroot IPv6" 13669220555@139.com
+        fi
+    else
+        echo "$(date) Network connected, But NOLY IPv4:$netcheck" | mail -s "Ubuntu yroot IPv4" 13669220555@139.com
+    fi
+else
+    echo "$(date) Network not connection"
+fi
+
+# echo "$(date)    $(ipv6_get)  ( $(ipv6_net_get) == $(net_get) )" | mail -s "Ubuntu yroot IPv6" 13669220555@139.com
