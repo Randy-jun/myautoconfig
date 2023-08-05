@@ -1,10 +1,9 @@
 #! /bin/bash
 
-netcheck=$(curl -m 15 -s test.ipw.cn);
-# echo $netcheck
+netcheck=$(curl -s --retry 10 --retry-delay 5 test.ipw.cn);
 if [ 0 = $? ]; then
     sleep 3
-    localipv6=$(curl -m 15 -s 6.ipw.cn);
+    localipv6=$(curl -s --retry 10 --retry-delay 5 6.ipw.cn);
     if [ 0 = $? ]; then
         if [ $localipv6 = $netcheck ]; then
             echo $localipv6 > ~/.iphold
