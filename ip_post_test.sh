@@ -5,9 +5,9 @@ do
     netcheck=$(curl -s --retry 10 --retry-delay 5 test.ipw.cn);
     if [ 0 = $? ]; then
         sleep 5s
-        # echo "1111" > ~/.iphold
+        # echo "" > ~/.iphold
         iphold=$(cat ~/.iphold)
-        echo $iphold
+        #echo $(date) $iphold
         localipv6=$(curl -s --retry 10 --retry-delay 5 6.ipw.cn);
         if [ 0 = $? ]; then
             if [ $localipv6 = $netcheck ]; then
