@@ -1,14 +1,14 @@
 #! /bin/bash
 
-for (( i=0; i<50 ; i=i+1 ))
+for (( i=0; i<5 ; i=i+1 ))
 do
-    netcheck=$(curl -s --retry 10 --retry-delay 5 test.ipw.cn);
+    netcheck=$(curl -s --retry 3 --retry-delay 2 test.ipw.cn);
     if [ 0 = $? ]; then
         sleep 5s
         # echo "" > ~/.iphold
         iphold=$(cat ~/.iphold)
         #echo $(date) $iphold
-        localipv6=$(curl -s --retry 10 --retry-delay 5 6.ipw.cn);
+        localipv6=$(curl -s --retry 5 --retry-delay 2 6.ipw.cn);
         if [ 0 = $? ]; then
             if [ $localipv6 = $netcheck ]; then
                 if [ $iphold != $localipv6 ]; then
