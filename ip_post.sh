@@ -1,10 +1,10 @@
 #! /bin/bash
 
-for (( i=0; i<100 ; i=i+1 ))
+for (( i=0; i<50 ; i=i+1 ))
 do
     netcheck=$(curl -s --retry 10 --retry-delay 5 test.ipw.cn);
     if [ 0 = $? ]; then
-        sleep 3s
+        sleep 5s
         # echo "1111" > ~/.iphold
         iphold=$(cat ~/.iphold)
         echo $iphold
@@ -14,10 +14,10 @@ do
                 if [ $iphold != $localipv6 ]; then
                     echo $localipv6 > ~/.iphold
                     echo "$(date) Network connected, IPv6:$localipv6" | tee -a ~/.ip.log | mail -s "Ubuntu yroot IPv6" 13669220555@139.com
-                    break
+                    exit 0
                 else
                     echo "$(date) Network connected, IPv6:$localipv6" >> ~/.ip.log
-                    break
+                    exit 0
                 fi
             fi
         else
