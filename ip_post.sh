@@ -30,7 +30,7 @@ do
             fi
         else
             echo "$(date) ipget:$localipv6 check:$netcheck" >> $LOGFILE
-            if [ $iphold != $netcheck ]; then
+            if [[ $iphold != $netcheck ]]; then
                 echo $netcheck > $IPHOLD
                 echo "$(date) Network connected, But NOLY IPv4:$netcheck" | tee -a $LOGFILE | mail -s "Ubuntu yroot IPv4" 13669220555@139.com
             else
