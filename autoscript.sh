@@ -5,7 +5,7 @@ tmux_config()
     rm -f ${HOME}/.tmux.conf;
     rm -f ${HOME}/.tmux.conf.local;
     git clone https://github.com/tmux-plugins/tpm ${HOME}/.tmux/plugins/tpm > /dev/null 2>&1;
-    ln -s -f ${HOME_DIR}/dotfiles/.tmux/.tmux.conf ${HOME}/.tmux.conf > /dev/null 2>&1 && 
+    ln -s -f ${HOME_DIR}/dotfiles/.tmux/.tmux.conf ${HOME}/.tmux.conf > /dev/null 2>&1 &&
     cp ${HOME_DIR}/dotfiles/.tmux/.tmux.conf.local ${HOME}/.tmux.conf.local > /dev/null 2>&1;
     if [ $? = 0 ] ; then
         return 0;
