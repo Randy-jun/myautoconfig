@@ -138,9 +138,9 @@ nodejs_current_install()
     else
         echo "Node.js reinstall...";
     fi
-    # curl -fsSL https://deb.nodesource.com/setup_current.x | sudo -E bash - &&
-    curl -sL https://deb.nodesource.com/setup_current.x | sudo -E bash - &&
-    sudo apt install -y nodejs;
+    curl -fsSL https://deb.nodesource.com/setup_current.x | sudo -E bash - &&
+    # curl -sL https://deb.nodesource.com/setup_current.x | sudo -E bash - &&
+    sudo apt install -y nodejs npm;
     sudo npm install -g cnpm --registry=https://registry.npmmirror.com;
     if [ $? = 0 ] ; then
         return 0;
@@ -161,22 +161,22 @@ vue_install()
         exit 1;
     fi
     # sudo npm install -g cnpm --registry=https://registry.npmmirror.com &&
-    sudo cnpm install cnpm@latest -g;
-    if [ $? = 0 ] ; then
-        echo -e "cnpm has been installed. [\033[;32mFinish\033[;m].";
-    else
-        echo -e "cnpm installed [\033[;31mFaile\033[;m].";
-        exit 1;
-    fi
+    # sudo cnpm install cnpm@latest -g;
+    # if [ $? = 0 ] ; then
+    #     echo -e "cnpm has been installed. [\033[;32mFinish\033[;m].";
+    # else
+    #     echo -e "cnpm installed [\033[;31mFaile\033[;m].";
+    #     exit 1;
+    # fi
     #sudo cnpm install vue-cli -g;#旧版本
-    sudo cnpm install @vue/cli -g;#新版本
-    if [ $? = 0 ] ; then
-        echo -e "Vue-cli has been installed. [\033[;32mFinish\033[;m].";
-    else
-        echo -e "Vue-cli installed [\033[;31mFaile\033[;m].";
-        exit 1;
-    fi
-    exit 0;
+    # sudo cnpm install @vue/cli -g;#新版本
+    # if [ $? = 0 ] ; then
+    #     echo -e "Vue-cli has been installed. [\033[;32mFinish\033[;m].";
+    # else
+    #     echo -e "Vue-cli installed [\033[;31mFaile\033[;m].";
+    #     exit 1;
+    # fi
+    # exit 0;
 }
 
 docker_install()

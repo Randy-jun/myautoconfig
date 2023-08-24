@@ -20,8 +20,8 @@ do
             if [ $localipv6 = $netcheck ]; then
                 if [[ $iphold != $localipv6 ]]; then
                     echo $localipv6 > $IPHOLD
-                    echo "$(date) Network connected, IPv6:$localipv6" | tee -a $LOGFILE | mail -s "Ubuntu yroot IPv6" 13669220555@139.com
-                    echo "http://[$localipv6]:10086" | mail -s "Ubuntu yroot IPv6" 13669220555@139.com
+                    echo "$(date) Network connected, IPv6:$localipv6" | tee -a $LOGFILE | mail -s "Ubuntu yroot IPv6" yangjun.randy@139.com
+                    echo "http://[$localipv6]:10086" | mail -s "Ubuntu yroot IPv6" yangjun.randy@139.com
                     exit 0
                 else
                     echo "$(date) Network connected, IPv6:$localipv6" >> $LOGFILE
@@ -32,7 +32,7 @@ do
             echo "$(date) ipget:$localipv6 check:$netcheck" >> $LOGFILE
             if [[ $iphold != $netcheck ]]; then
                 echo $netcheck > $IPHOLD
-                echo "$(date) Network connected, But NOLY IPv4:$netcheck" | tee -a $LOGFILE | mail -s "Ubuntu yroot IPv4" 13669220555@139.com
+                echo "$(date) Network connected, But NOLY IPv4:$netcheck" | tee -a $LOGFILE | mail -s "Ubuntu yroot IPv4" yangjun.randy@139.com
             else
                 echo "$(date) Network connected, But NOLY IPv4:$netcheck" >> $LOGFILE
             fi
