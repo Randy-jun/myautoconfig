@@ -5,6 +5,8 @@ on:
   # Runs on pushes targeting the default branch
   push:
     branches: ["master"]
+  schedule:
+      - cron: '0 0 * * *' # 每天一次, 低碳一点
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -49,3 +51,34 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v2
+  
+  #sync submodules  
+  omz-sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: TG908/fork-sync@v1.6.3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          owner: ohmyzsh # fork 的上游仓库 user
+          head: master # fork 的上游仓库 branch
+          base: master # 本地仓库 branch
+
+  tmux-sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: TG908/fork-sync@v1.6.3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          owner: gpakosz # fork 的上游仓库 user
+          head: master # fork 的上游仓库 branch
+          base: master # 本地仓库 branch
+  
+  vimrc-sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: TG908/fork-sync@v1.6.3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          owner: amix # fork 的上游仓库 user
+          head: master # fork 的上游仓库 branch
+          base: master # 本地仓库 branch
