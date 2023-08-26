@@ -132,16 +132,18 @@ sublime_new_install()
 nodejs_current_install()
 {
     echo "Node.js current install...";
-    for pkg in nodejs; do sudo apt purge nodejs $pkg && sudo rm -r /etc/apt/sources.list.d/nodesource.list; done
+    for pkg in nodejs; do sudo apt purge nodejs -y $pkg && sudo rm -r /etc/apt/sources.list.d/nodesource.list; done
     if [ $? = 0 ] ; then
     echo "Node.js current reinstall...";
     else
         echo "Node.js reinstall...";
     fi
-    curl -fsSL https://deb.nodesource.com/setup_current.x | sudo -E bash - &&
-    # curl -sL https://deb.nodesource.com/setup_current.x | sudo -E bash - &&
-    sudo apt install -y nodejs npm;
-    sudo npm install -g cnpm --registry=https://registry.npmmirror.com;
+    # curl -fsSL https://deb.nodesource.com/setup_current.x | sudo -E bash - &&
+    curl -sL https://deb.nodesource.com/setup_current.x | sudo -E bash - &&
+    sudo apt install nodejs -y &&
+    sudo apt install npm -y;
+    sudo npm install -g cnpm --registry=https://registry.npmmirror.com &&
+    sudo cnpm install cnpm@latest -g;
     if [ $? = 0 ] ; then
         return 0;
     else
