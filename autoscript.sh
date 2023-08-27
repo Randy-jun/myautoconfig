@@ -143,7 +143,8 @@ nodejs_current_install()
     sudo apt install nodejs -y &&
     sudo apt install npm -y;
     sudo npm install -g cnpm --registry=https://registry.npmmirror.com &&
-    sudo cnpm install cnpm@latest -g;
+    sudo cnpm install cnpm@latest -g &&
+    sudo cnpm install pnpm@latest -g;
     if [ $? = 0 ] ; then
         return 0;
     else
