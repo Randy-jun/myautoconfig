@@ -7,4 +7,4 @@ This is my autoconfig tools.
 3.第一个选项（System mail name）默认，第二个选项（SMTP relay host）留空；<br>
 4.编辑：/etc/hosts文件，删除：127.0.1.1 pve 增加：192.168.0.3 pve.yroot pve<br>
 5.使用命令：echo "$(date) Test！" | mail -s "Test" yangjun.randy@139.com<br>
-6.编辑定时文件添加：*/5 *   * * *   root   bash +x /home/root/myautoconfig/ip_post.sh<br>
+6.编辑定时文件添加：*/5 *   * * *   yroot   /home/root/myautoconfig/ip_post.sh<br>

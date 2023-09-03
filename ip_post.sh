@@ -14,32 +14,32 @@ do
     if [ 0 = $? ]; then
         sleep 5s
         iphold=$(cat $IPHOLD)
-        echo $(date) $iphold
+        # echo $(date) $iphold
         localipv6=$(curl -s --retry 5 --retry-delay 2 6.ipw.cn);
         if [ 0 = $? ]; then
             if [ $localipv6 = $netcheck ]; then
                 if [[ $iphold != $localipv6 ]]; then
                     echo $localipv6 > $IPHOLD
-                    echo "$(date) Network connected, IPv6:$localipv6" | tee -a $LOGFILE | mail -s "Ubuntu yroot IPv6" yangjun.randy@139.com
+                    echo "$(date -R) Network connected, IPv6:$localipv6" | tee -a $LOGFILE | mail -s "Ubuntu yroot IPv6" yangjun.randy@139.com
                     echo "http://[$localipv6]:10086" | mail -s "Ubuntu yroot IPv6" yangjun.randy@139.com
                     exit 0
                 else
-                    echo "$(date) Network connected, IPv6:$localipv6" >> $LOGFILE
+                    echo "$(date -R) Network connected, IPv6:$localipv6" >> $LOGFILE
                     exit 0
                 fi
             fi
         else
-            echo "$(date) ipget:$localipv6 check:$netcheck" >> $LOGFILE
+            echo "$(date -R) ipget:$localipv6 check:$netcheck" >> $LOGFILE
             if [[ $iphold != $netcheck ]]; then
                 echo $netcheck > $IPHOLD
-                echo "$(date) Network connected, But NOLY IPv4:$netcheck" | tee -a $LOGFILE | mail -s "Ubuntu yroot IPv4" yangjun.randy@139.com
+                echo "$(date -R) Network connected, But NOLY IPv4:$netcheck" | tee -a $LOGFILE | mail -s "Ubuntu yroot IPv4" yangjun.randy@139.com
             else
-                echo "$(date) Network connected, But NOLY IPv4:$netcheck" >> $LOGFILE
+                echo "$(date -R) Network connected, But NOLY IPv4:$netcheck" >> $LOGFILE
             fi
         fi
     else
         echo "" > $IPHOLD
-        echo "$(date) Network not connection" | tee -a $LOGFILE
+        echo "$(date -R) Network not connection" | tee -a $LOGFILE
     fi
     sleep 30s
 done
