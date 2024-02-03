@@ -21,7 +21,7 @@ do
                 if [[ $iphold != $localipv6 ]]; then
                     echo $localipv6 > $IPHOLD
                     echo "$(date -R) Network connected, IPv6:$localipv6" | tee -a $LOGFILE | mail -s "Ubuntu yroot IPv6" yangjun.randy@139.com
-                    echo "http://[$localipv6]:10086" | mail -s "Ubuntu yroot IPv6" yangjun.randy@139.com
+                    echo "http://[$localipv6]:5678" | mail -s "Ubuntu yroot IPv6" yangjun.randy@139.com
                     exit 0
                 else
                     echo "$(date -R) Network connected, IPv6:$localipv6" >> $LOGFILE
