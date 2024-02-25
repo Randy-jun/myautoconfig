@@ -7,39 +7,28 @@ LOGFILE=~/.ip/ip.log
 [ ! -f "$IPHOLD" ] && touch "$IPHOLD"
 [ ! -f "$LOGFILE" ] && touch "$LOGFILE"
 # echo "" > $IPHOLD
-
-for (( i=0; i<5 ; i=i+1 ))
+localipv6=$(ip -o addr show | grep -v deprecated | grep ' inet6 [^f:]'| sed -nr 's#^.+? + inet6 ([a-f0-9:]+)/.+? scope global .*? valid_lft ([0-9]+sec) .*#\2 \1#p' | grep 'ff:fe'| sort -nr| head -n1| cut -d' ' -f2);
+iphold=$(cat $IPHOLD);
+for (( i=0; i<2 ; i=i+1 ))
 do
-    netcheck=$(curl -s --retry 3 --retry-delay 2 test.ipw.cn);
-    if [ 0 = $? ]; then
-        sleep 5s
-        iphold=$(cat $IPHOLD)
-        # echo $(date) $iphold
-        localipv6=$(curl -s --retry 5 --retry-delay 2 6.ipw.cn);
-        if [ 0 = $? ]; then
-            if [ $localipv6 = $netcheck ]; then
-                if [[ $iphold != $localipv6 ]]; then
-                    echo $localipv6 > $IPHOLD
-                    echo "$(date -R) Network connected, IPv6:$localipv6" | tee -a $LOGFILE | mail -s "Ubuntu yroot IPv6" yangjun.randy@139.com
-                    echo "http://[$localipv6]:5678" | mail -s "Ubuntu yroot IPv6" yangjun.randy@139.com
-                    exit 0
-                else
-                    echo "$(date -R) Network connected, IPv6:$localipv6" >> $LOGFILE
-                    exit 0
-                fi
-            fi
+    netcheck=$(curl -s --retry 3 --retry-delay 2 6.ipw.cn 2> /dev/null || curl -s -6 --retry 3 retry-delay 2 api64.ipify.org 2> /dev/null);
+    if [ $localipv6 = $netcheck ]; then
+        if [[ $iphold != $localipv6 ]]; then
+            echo $localipv6 > $IPHOLD
+            echo "$(date -R) Network connected, IPv6:$localipv6" | tee -a $LOGFILE | mail -s "Debianu yroot IP" yangjun.randy@139.com
+            echo "http://[$localipv6]:5678" > temp
+            echo "http://[$localipv6]:2283" >> temp
+            echo "https://[$localipv6]:9443" >> temp
+            echo "https://[$localipv6]:9090" >> temp
+            mail -s "Ubuntu yroot IPv6" yangjun.randy@139.com < temp
+            exit 0
         else
-            echo "$(date -R) ipget:$localipv6 check:$netcheck" >> $LOGFILE
-            if [[ $iphold != $netcheck ]]; then
-                echo $netcheck > $IPHOLD
-                echo "$(date -R) Network connected, But NOLY IPv4:$netcheck" | tee -a $LOGFILE | mail -s "Ubuntu yroot IPv4" yangjun.randy@139.com
-            else
-                echo "$(date -R) Network connected, But NOLY IPv4:$netcheck" >> $LOGFILE
-            fi
+            echo "$(date -R) Network connected, IPv6:$localipv6" >> $LOGFILE
+            exit 0
         fi
     else
-        echo "" > $IPHOLD
-        echo "$(date -R) Network not connection" | tee -a $LOGFILE
+        echo "$(date -R) ipget:$localipv6 check:$netcheck" >> $LOGFILE
+        echo "$(date -R) netchaek:$netcheck localIPv6:$localipv6" | tee -a $LOGFILE | mail -s "Debian yroot IP" yangjun.randy@139.com
     fi
     sleep 30s
 done
