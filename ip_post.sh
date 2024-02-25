@@ -3,6 +3,8 @@
 IPDIR=~/.ip
 IPHOLD=~/.ip/iphold
 LOGFILE=~/.ip/ip.log
+TEMP=~/.ip/temp
+
 [ ! -d "$IPDIR" ] && mkdir "$IPDIR"
 [ ! -f "$IPHOLD" ] && touch "$IPHOLD"
 [ ! -f "$LOGFILE" ] && touch "$LOGFILE"
@@ -16,11 +18,11 @@ do
         if [[ $iphold != $localipv6 ]]; then
             echo $localipv6 > $IPHOLD
             echo "$(date -R) Network connected, IPv6:$localipv6" | tee -a $LOGFILE | mail -s "Debianu yroot IP" yangjun.randy@139.com
-            echo "http://[$localipv6]:5678" > temp
-            echo "http://[$localipv6]:2283" >> temp
-            echo "https://[$localipv6]:9443" >> temp
-            echo "https://[$localipv6]:9090" >> temp
-            mail -s "Ubuntu yroot IPv6" yangjun.randy@139.com < temp
+            echo "http://[$localipv6]:5678" > $TEMP
+            echo "http://[$localipv6]:2283" >> $TEMP
+            echo "https://[$localipv6]:9443" >> $TEMP
+            echo "https://[$localipv6]:9090" >> $TEMP
+            mail -s "Ubuntu yroot IPv6" yangjun.randy@139.com < $TEMP
             exit 0
         else
             echo "$(date -R) Network connected, IPv6:$localipv6" >> $LOGFILE
