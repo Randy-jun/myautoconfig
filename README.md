@@ -10,6 +10,6 @@ This is my autoconfig tools.
 6.编辑定时文件添加：*/5 *   * * *   yroot   /home/yroot/myautoconfig/ip_post.sh<br>
 
 #Immich-app
-1.镜像下载使用南京大学镜像：'https://doc.nju.edu.cn/books/35f4a/page/gcr'
-2.人脸识别等模型可使用镜像站：https://hf-mirror.com
-在.env文件中添加：'HF_ENDPOINT=https://hf-mirror.com'
+1.镜像下载使用南京大学镜像：`https://doc.nju.edu.cn/books/35f4a/page/gcr`<br>
+2.人脸识别等模型可使用镜像站：https://hf-mirror.com,在.env文件中添加：<br>
+`HF_ENDPOINT=https://hf-mirror.com`<br>
