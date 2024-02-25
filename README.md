@@ -8,3 +8,8 @@ This is my autoconfig tools.
 4.编辑：/etc/hosts文件，删除：127.0.1.1 pve 增加：192.168.0.x pve.yroot pve<br>
 5.使用命令：echo "$(date) Test！" | mail -s "Test" yangjun.randy@139.com<br>
 6.编辑定时文件添加：*/5 *   * * *   yroot   /home/yroot/myautoconfig/ip_post.sh<br>
+
+#Immich-app
+1.镜像下载使用南京大学镜像：'https://doc.nju.edu.cn/books/35f4a/page/gcr'
+2.人脸识别等模型可使用镜像站：https://hf-mirror.com
+在.env文件中添加：'HF_ENDPOINT=https://hf-mirror.com'
