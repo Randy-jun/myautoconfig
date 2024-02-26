@@ -17,12 +17,12 @@ do
     if [ $localipv6 = $netcheck ]; then
         if [[ $iphold != $localipv6 ]]; then
             echo $localipv6 > $IPHOLD
-            echo "$(date -R) Network connected, IPv6:$localipv6" | tee -a $LOGFILE | mail -s "Debianu yroot IP" yangjun.randy@139.com
+            echo "$(date -R) Network connected, IPv6:$localipv6" | tee -a $LOGFILE | mail -s "Debian yroot IP" yangjun.randy@139.com
             echo "http://[$localipv6]:5678" > $TEMP
             echo "http://[$localipv6]:2283" >> $TEMP
             echo "https://[$localipv6]:9443" >> $TEMP
             echo "https://[$localipv6]:9090" >> $TEMP
-            mail -s "Ubuntu yroot IPv6" yangjun.randy@139.com < $TEMP
+            mail -s "Debian yroot IP" yangjun.randy@139.com < $TEMP
             exit 0
         else
             echo "$(date -R) Network connected, IPv6:$localipv6" >> $LOGFILE
