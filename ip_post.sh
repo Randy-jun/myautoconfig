@@ -20,6 +20,7 @@ do
           echo "http://[$localipv6]:5678" > $TEMP
           echo "http://[$localipv6]:2283" >> $TEMP
           echo "http://[$localipv6]:7575" >> $TEMP
+          echo "http://[$localipv6]:8123" >> $TEMP
           echo "https://[$localipv6]:9443" >> $TEMP
           echo "https://[$localipv6]:9090" >> $TEMP
           mail -s "Debian yroot IP" yangjun.randy@139.com < $TEMP
