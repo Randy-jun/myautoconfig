@@ -17,9 +17,9 @@ do
       echo $localipv6 > $IPHOLD
        # echo "$(date -R) Network connected, IPv6:$localipv6" | tee -a $LOGFILE | mail -s "Debian yroot IP" yangjun.randy@139.com
        echo "$(date -R) Network connected, IPv6:$localipv6" | tee -a $LOGFILE
-      if [ -n "$localipv6" ]; then
+      if [ -n $localipv6 ]; then
           echo $localipv6 > $TEMP
-          echo "http://[$localipv6]:5678" > $TEMP
+          echo "http://[$localipv6]:5678" >> $TEMP
           echo "http://[$localipv6]:2283" >> $TEMP
           echo "http://[$localipv6]:7575" >> $TEMP
           echo "http://[$localipv6]:8123" >> $TEMP
