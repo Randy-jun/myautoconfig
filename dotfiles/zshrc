@@ -56,7 +56,7 @@ CASE_SENSITIVE="true"
 plugins=(git)
 
 # User configuration
-export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/local/cuda/bin"
 # export MANPATH="/usr/local/man:$MANPATH"
 export PYTHONPATH="/usr/local:$PYTHONPATH"
 
