@@ -20,12 +20,14 @@ do
       if [ -n $localipv6 ]; then
           echo $localipv6 > $TEMP
           echo "http://[$localipv6]:5678" >> $TEMP
+          echo "http://[$localipv6]:5244" >> $TEMP
           echo "http://[$localipv6]:2283" >> $TEMP
-          echo "http://[$localipv6]:7575" >> $TEMP
+          # echo "http://[$localipv6]:7575" >> $TEMP
           echo "http://[$localipv6]:8123" >> $TEMP
           echo "https://[$localipv6]:9443" >> $TEMP
           echo "https://[$localipv6]:9090" >> $TEMP
           mail -s "Debian yroot $(date -R) IP" yangjun.randy@139.com < $TEMP
+          mail -s "Debian yroot $(date -R) IP" yangjun.randy@foxmail.com < $TEMP
       else
           exit 0
       fi
