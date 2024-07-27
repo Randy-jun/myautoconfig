@@ -19,8 +19,10 @@ do
        echo "$(date -R) Network connected, IPv6:$localipv6" >> $LOGFILE
       if [ -n $localipv6 ]; then
           echo $localipv6 > $TEMP
+          echo "http://[$localipv6]" >> $TEMP
           echo "http://[$localipv6]:5678" >> $TEMP
           echo "http://[$localipv6]:5244" >> $TEMP
+          echo "http://[$localipv6]:5230" >> $TEMP
           echo "http://[$localipv6]:2283" >> $TEMP
           # echo "http://[$localipv6]:7575" >> $TEMP
           echo "http://[$localipv6]:8123" >> $TEMP
