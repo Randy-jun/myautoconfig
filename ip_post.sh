@@ -9,7 +9,7 @@ TEMP=~/.ip/temp
 [ ! -f "$IPHOLD" ] && touch "$IPHOLD"
 [ ! -f "$LOGFILE" ] && touch "$LOGFILE"
 # echo "" > $IPHOLD
-localipv6=$(ip -o addr show | grep -v deprecated | grep ' inet6 [^f:]'| sed -nr 's#^.+? + inet6 ([a-f0-9:]+)/.+? scope global .*? preferred_lft ([0-9]+sec) .*#\2 \1#p' | grep 'ff:fe'| sort -nr| head -n1| cut -d' ' -f2);
+localipv6=$(ip -o addr show | grep -v deprecated | grep ' inet6 [^f:]'| sed -nr 's#^.+? + inet6 ([a-f0-9:]+)/.+? scope global .*? valid_lft ([0-9]+sec) .*#\2 \1#p' | grep 'ff:fe'| sort -nr| head -n1| cut -d' ' -f2);
 for (( i=0; i<2 ; i=i+1 ))
 do
   iphold=$(cat $IPHOLD);
