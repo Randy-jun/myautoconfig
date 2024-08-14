@@ -39,5 +39,5 @@ do
       echo "$(date -R) Network connected, IPv6:$localipv6" >> $LOGFILE
       exit 0
   fi
-  sleep 30s
+  sleep 60s
 done
