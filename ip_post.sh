@@ -29,6 +29,7 @@ do
           echo "http://[$localipv6]:10086" >> $TEMP
           echo "https://[$localipv6]:9443" >> $TEMP
           echo "https://[$localipv6]:9090" >> $TEMP
+          ip -6 addr show eno1 | grep inet6 >> $TEMP
           mail -s "Debian yroot $(date -R) IP" yangjun.randy@139.com < $TEMP
           mail -s "Debian yroot $(date -R) IP" yangjun.randy@foxmail.com < $TEMP
       else
