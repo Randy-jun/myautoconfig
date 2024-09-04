@@ -27,6 +27,7 @@ do
           # echo "http://[$localipv6]:7575" >> $TEMP
           echo "http://[$localipv6]:8123" >> $TEMP
           echo "http://[$localipv6]:10086" >> $TEMP
+          echo "http://[$localipv6]:19999" >> $TEMP
           echo "https://[$localipv6]:9443" >> $TEMP
           echo "https://[$localipv6]:9090" >> $TEMP
           ip -6 addr show eno1 | grep inet6 >> $TEMP
