@@ -1,5 +1,6 @@
 #!/bin/bash
 
+#tmux_config()
 tmux_config()
 {
     rm -f ${HOME}/.tmux.conf;
