@@ -16,7 +16,7 @@ do
   if [[ $iphold != $localipv6 ]]; then
       echo $localipv6 > $IPHOLD
        # echo "$(date -R) Network connected, IPv6:$localipv6" | tee -a $LOGFILE | mail -s "Debian yroot IP" yangjun.randy@139.com
-       echo "$(date -R) Network connected, IPv6:$localipv6" >> $LOGFILE
+       echo "$(date -R) $(acpi -ab | tr '\n' ' ') Network connected, IPv6:$localipv6" >> $LOGFILE
       if [ -n $localipv6 ]; then
           echo $localipv6 > $TEMP
           echo "http://[$localipv6]" >> $TEMP
@@ -38,7 +38,7 @@ do
       fi
       exit 0
   else
-      echo "$(date -R) Network connected, IPv6:$localipv6" >> $LOGFILE
+      echo "$(date -R) $(acpi -ab | tr '\n' ' ') Network connected, IPv6:$localipv6" >> $LOGFILE
       exit 0
   fi
   sleep 30s
