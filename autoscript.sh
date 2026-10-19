@@ -72,7 +72,6 @@ docker_install()
     # curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg;
     # echo "deb [arch="$(dpkg --print-architecture)" signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu   "$(. /etc/os-release && echo "$VERSION_CODENAME")" stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null;
     # sudo apt update && sudo apt install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin;
-    export DOWNLOAD_URL="https://mirrors.tuna.tsinghua.edu.cn/docker-ce";
     curl -fsSL https://get.docker.com/ | sudo -E sh;
     # sudo docker run hello-world;
     if [ $? = 0 ] ; then
@@ -95,7 +94,7 @@ update()
         echo -e "$0 updated [\033[;32mFinish\033[;m].";
         return 0;
     else
-        echo -e "$0 updated [\033[;31mFaile\033[;m].";
+        echo -e "$0 updated [\033[;31mFail\033[;m].";
         return 1;
     fi
 }
@@ -108,7 +107,7 @@ main()
     if [ $? = 0 ] ; then
         echo -e "Submodule has been copied [\033[;32mFinish\033[;m].";
     else
-        echo -e "Software has been copied [\033[;31mFaile\033[;m].";
+        echo -e "Software has been copied [\033[;31mFail\033[;m].";
         exit 1;
     fi
     # sudo git submodule update --remote > /dev/null 2>&1;
@@ -116,7 +115,7 @@ main()
     if [ $? = 0 ] ; then
         echo -e "Submodule has been updated [\033[;32mFinish\033[;m].";
     else
-        echo -e "Software has been updated [\033[;31mFaile\033[;m].";
+        echo -e "Software has been updated [\033[;31mFail\033[;m].";
         exit 1;
     fi
     # git fetch;
@@ -128,7 +127,7 @@ main()
     if [ $? = 0 ] ; then
         echo -e "Software has been installed [\033[;32mFinish\033[;m].";
     else
-        echo -e "Software has been installed [\033[;31mFaile\033[;m].";
+        echo -e "Software has been installed [\033[;31mFail\033[;m].";
         exit 1;
     fi
 
@@ -142,7 +141,7 @@ main()
             echo -e "$0 deployed ${sw} [\033[;32mFinish\033[;m].";
             continue;
         else
-            echo -e "$0 deployed ${sw} [\033[;31mFaile\033[;m].";
+            echo -e "$0 deployed ${sw} [\033[;31mFail\033[;m].";
             return 1;
         fi
     done
@@ -170,11 +169,11 @@ if [ $# -ge 0 -a $# -le 1 ]; then
         docker_install) echo "$0 start install Docker..." && docker_install;
             exit 0;
             ;;
-        *) echo -e "Usage:$0 [ \033[;32minstall\033[;m | \033[;32mupdate\033[;m ]";
+        *) echo -e "Usage:$0 [ \033[;32minstall\033[;m | \033[;32mupdate\033[;m | \033[;32mdocker_install\033[;m ]";
             exit 0;
             ;;
     esac
 else
-    echo -e "Usage:$0 [ \033[;32minstall\033[;m | \033[;32mupdate\033[;m ] | \033[;32menv_install\033[;m ] | \033[;32menv_update\033[;m ]";
+    echo -e "Usage:$0 [ \033[;32minstall\033[;m | \033[;32mupdate\033[;m | \033[;32mdocker_install\033[;m ]";
     exit 0;
 fi

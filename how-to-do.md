@@ -119,7 +119,7 @@ FLUSH PRIVILEGES;
 ```
 ## 7. 修改/etc/hosts文件
 ```
-sudo $HOME/myautoconfig/host_wrtie.sh;
+sudo $HOME/myautoconfig/host_write.sh;
 ```
 + host_write.sh
 ```
